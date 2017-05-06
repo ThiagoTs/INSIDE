@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane fx:id="paneProcesso" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaProcessoController">
+   <children>
+      <AnchorPane fx:id="ApaneTabela" prefHeight="272.0" prefWidth="766.0">
+         <children>
+            <HBox fx:id="hbCrud" alignment="TOP_RIGHT" layoutX="14.0" layoutY="232.0" prefHeight="31.0" prefWidth="189.0">
+               <children>
+                  <Button fx:id="btnExcluir" mnemonicParsing="false" onAction="#excluirProcesso" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnAlterar" cancelButton="true" mnemonicParsing="false" onAction="#editarProcesso" prefHeight="25.0" prefWidth="60.0" text="Alterar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnSalvar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarProcesso" prefHeight="25.0" prefWidth="60.0" text="Salvar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox fx:id="hbResposta" alignment="TOP_RIGHT" layoutX="621.0" layoutY="232.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="136.0">
+               <children>
+                  <Button fx:id="btnIndeferir" mnemonicParsing="false" onAction="#indeferirProc" text="Indeferir">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnDeferir" mnemonicParsing="false" onAction="#deferirProc" prefHeight="25.0" prefWidth="59.0" text="Deferir ">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <TableView fx:id="tblProcessosView" layoutX="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="741.0">
+               <columns>
+                  <TableColumn fx:id="colunProcesso" editable="false" prefWidth="264.0" text="PROCESSO" />
+                  <TableColumn fx:id="colunStatus" prefWidth="230.0" text="STATUS" />
+                  <TableColumn fx:id="colunComent" prefWidth="246.0" text="COMENTARIOS" />
+               </columns>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <SepiaTone level="0.35" />
+               </effect>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

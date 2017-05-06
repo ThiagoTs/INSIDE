@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="aPaneCadastro" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TabCadastrosController">
+   <children>
+      <TabPane fx:id="tabPaneCad" layoutY="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="467.0" prefWidth="604.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab fx:id="tabTipoProc" text="TIPO DE PROCESSO">
+               <content>
+                  <AnchorPane fx:id="aPaneTipoProc" minHeight="0.0" minWidth="0.0" prefHeight="465.0" prefWidth="685.0">
+                     <children>
+                        <HBox fx:id="hbDocumento" alignment="CENTER" layoutX="86.0" layoutY="161.0" prefHeight="37.0" prefWidth="254.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <ComboBox fx:id="comboDocumentos" prefHeight="25.0" prefWidth="184.0" promptText="Selecione o documento">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="3.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <ToggleButton fx:id="btnAddDocTab" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addDocumentoTabela" prefHeight="40.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../../../../../Desktop/INSIDE/plus.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </ToggleButton>
+                           </children>
+                        </HBox>
+                        <Label fx:id="lblDescricao" layoutX="403.0" layoutY="99.0" text="Descrição:" GridPane.columnIndex="2">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <HBox fx:id="hbCrudProc" alignment="TOP_RIGHT" layoutX="554.0" layoutY="419.0" prefHeight="36.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <children>
+                              <Button fx:id="btnExcluirProc" mnemonicParsing="false" onAction="#excluirProcesso" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnAlterarProc" cancelButton="true" mnemonicParsing="false" onAction="#editarProcesso" prefHeight="25.0" prefWidth="60.0" text="Alterar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnSalvarProc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarProcesso" prefHeight="25.0" prefWidth="60.0" text="Salvar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <TreeTableView fx:id="tblFluxoProc" layoutX="403.0" layoutY="205.0" prefHeight="200.0" prefWidth="350.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <columns>
+                              <TreeTableColumn fx:id="colunFluxo" editable="false" prefWidth="329.0" text="Fluxo do processo" />
+                           </columns>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <SepiaTone level="0.35" />
+                           </effect>
+                        </TreeTableView>
+                        <TreeTableView fx:id="tblDocumentos" layoutX="15.0" layoutY="205.0" prefHeight="200.0" prefWidth="337.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <columns>
+                              <TreeTableColumn fx:id="colunDocumentos" editable="false" prefWidth="320.0" text="Documentos" />
+                           </columns>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <SepiaTone level="0.35" />
+                           </effect>
+                        </TreeTableView>
+                        <Label fx:id="lblNomeProc" layoutX="15.0" layoutY="99.0" text="Nome:" />
+                        <Label fx:id="lblBuscaResponsavel" layoutX="403.0" layoutY="173.0" text="Buscar responsável:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <HBox fx:id="hbBuscaResp" alignment="CENTER" layoutX="531.0" layoutY="154.0" prefHeight="54.0" prefWidth="235.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <children>
+                              <TextField fx:id="txtBuscResp" prefHeight="25.0" prefWidth="206.0" />
+                              <ToggleButton fx:id="btnAddResp" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addResponsavelFluxo" prefHeight="40.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                                 <graphic>
+                                    <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../../../../../Desktop/INSIDE/plus.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </ToggleButton>
+                           </children>
+                        </HBox>
+                        <TextField fx:id="txtNomeProc" layoutX="88.0" layoutY="95.0" prefHeight="25.0" prefWidth="225.0" GridPane.columnIndex="1" />
+                        <Label fx:id="lblDocumento" layoutX="16.0" layoutY="173.0" text="Documentos:" GridPane.rowIndex="1" />
+                        <Separator layoutX="11.0" layoutY="77.0" prefHeight="13.0" prefWidth="784.0" />
+                        <Text fx:id="textCadTipoProc" layoutX="276.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR TIPO DE PROCESSO">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Separator layoutX="13.0" layoutY="455.0" prefHeight="13.0" prefWidth="777.0" />
+                        <TextArea fx:id="txtDescricao" layoutX="467.0" layoutY="93.0" prefHeight="70.0" prefWidth="287.0" />
+                        <Label fx:id="txtBuscaProc" layoutX="16.0" layoutY="56.0" text="Buscar processo:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboTiposProc" layoutX="114.0" layoutY="52.0" prefHeight="25.0" prefWidth="242.0" promptText="Selecione um tipo de processo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <Separator layoutX="222.0" layoutY="33.0" prefHeight="12.0" prefWidth="322.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabUsuario" text="USUÁRIOS">
+               <content>
+                  <AnchorPane fx:id="aPaneUser" minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="603.0">
+                     <children>
+                        <Label fx:id="lblNome" layoutX="23.0" layoutY="114.0" text="Nome:" />
+                        <Label fx:id="lblCpf" layoutX="437.0" layoutY="149.0" text="CPF:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblCargo" layoutX="23.0" layoutY="252.0" text="Cargo:" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="comoTipoUser" layoutX="116.0" layoutY="292.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o tipo" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <TextField fx:id="txtTelefone" layoutX="116.0" layoutY="149.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <HBox fx:id="hbSexo" layoutX="528.0" layoutY="203.0" prefHeight="28.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <children>
+                              <RadioButton fx:id="rbMasculino" mnemonicParsing="false" selected="true" text="Masculino">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="groupSexo" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbFeminino" mnemonicParsing="false" text="Feminino" toggleGroup="$groupSexo">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </RadioButton>
+                           </children>
+                           <GridPane.margin>
+                              <Insets top="20.0" />
+                           </GridPane.margin>
+                        </HBox>
+                        <TextField fx:id="txtMatricula" layoutX="528.0" layoutY="107.0" GridPane.columnIndex="3" />
+                        <Label fx:id="lblSexo" layoutX="437.0" layoutY="194.0" text="Sexo:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblMatricula" layoutX="437.0" layoutY="107.0" text="Matrícula:" GridPane.columnIndex="2">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="txtEmail" layoutX="116.0" layoutY="194.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="lblTipoUser" layoutX="23.0" layoutY="299.0" text="Tipo de usuário:" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="comboCargo" layoutX="116.0" layoutY="245.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o cargo" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <HBox fx:id="hbCrud" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="308.0" prefHeight="53.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <children>
+                              <Button fx:id="btnExcluirUser" mnemonicParsing="false" onAction="#excluirUsuario" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnAlterarUser" cancelButton="true" mnemonicParsing="false" onAction="#editarUsuario" prefHeight="25.0" prefWidth="60.0" text="Alterar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnSalvarUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarUsuario" prefHeight="25.0" prefWidth="60.0" text="Salvar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Label fx:id="lblDepart" layoutX="437.0" layoutY="245.0" text="Departamento:" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblTelefone" layoutX="23.0" layoutY="156.0" text="Telefone:" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtCpf" layoutX="528.0" layoutY="149.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="comoDepart" layoutX="528.0" layoutY="245.0" prefHeight="25.0" prefWidth="234.0" promptText="Selecione o departamento" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <TextField fx:id="txtNome" layoutX="116.0" layoutY="107.0" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="1" />
+                        <Label fx:id="lblEmail" layoutX="23.0" layoutY="201.0" text="E-mail:" GridPane.rowIndex="2" />
+                        <Text fx:id="textCadUser" layoutX="253.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO DE USUÁRIOS" textAlignment="CENTER" wrappingWidth="244.52294921875">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Separator layoutX="14.0" layoutY="80.0" prefHeight="12.0" prefWidth="774.0" />
+                        <Separator layoutX="14.0" layoutY="382.0" prefHeight="12.0" prefWidth="780.0" />
+                        <Label fx:id="lblBuscaUser" layoutX="23.0" layoutY="47.0" text="Buscar usuário:">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtBuscaUser" layoutX="303.0" layoutY="47.0" prefHeight="25.0" prefWidth="275.0" promptText="Insira o nome do usuário" />
+                        <Separator layoutX="214.0" layoutY="28.0" prefHeight="12.0" prefWidth="322.0" />
+                        <ToggleButton fx:id="btnBuscaUser" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="581.0" layoutY="40.0" mnemonicParsing="false" onAction="#buscarUsuarios" prefHeight="30.0" prefWidth="38.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <image>
+                                    <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                           </graphic>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ToggleButton>
+                        <ComboBox fx:id="comboTipoBuscaUser" layoutX="141.0" layoutY="47.0" prefHeight="25.0" prefWidth="145.0" promptText="Selecione um item" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabDocumentos" text="DOCUMENTOS">
+               <content>
+                  <AnchorPane fx:id="aPaneDoc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="291.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR DOCUMENTOS">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
+                        <Separator layoutX="14.0" layoutY="52.0" prefHeight="12.0" prefWidth="774.0" />
+                        <Separator layoutX="14.0" layoutY="440.0" prefHeight="12.0" prefWidth="774.0" />
+                        <Label fx:id="lblNomeDoc" layoutX="140.0" layoutY="116.0" text="Nome:" />
+                        <TextField fx:id="txtNomeDoc" layoutX="194.0" layoutY="112.0" prefHeight="25.0" prefWidth="333.0" />
+                        <TreeTableView fx:id="tblListDocumentos" layoutX="192.0" layoutY="186.0" prefHeight="181.0" prefWidth="435.0">
+                           <columns>
+                              <TreeTableColumn fx:id="colunListDocumentos" editable="false" prefWidth="434.0" text="Documentos" />
+                           </columns>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <SepiaTone level="0.35" />
+                           </effect>
+                        </TreeTableView>
+                        <HBox fx:id="hbCrudDoc" alignment="CENTER_RIGHT" layoutX="427.0" layoutY="369.0" prefHeight="53.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btnExcluirDoc" mnemonicParsing="false" onAction="#excluirDocumentosList" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnAlterarDoc" cancelButton="true" mnemonicParsing="false" onAction="#editarDocumentoList" prefHeight="25.0" prefWidth="60.0" text="Alterar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnSalvarDoc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarDocumentoList" prefHeight="25.0" prefWidth="60.0" text="Salvar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <ToggleButton fx:id="btnAddDoc" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="527.0" layoutY="105.0" mnemonicParsing="false" onAction="#addDocumentoLista" prefHeight="40.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <image>
+                                    <Image url="@../../../../../Desktop/INSIDE/plus.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                           </graphic>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ToggleButton>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
