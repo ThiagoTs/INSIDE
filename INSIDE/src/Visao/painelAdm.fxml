@@ -108,7 +108,10 @@
                               <Image url="@../../../../../Desktop/INSIDE/USER.png" />
                            </image>
                         </ImageView>
-                        <TextArea fx:id="textUser" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="302.0" />
+                        <TextArea fx:id="textUser" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="302.0" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Comic Sans MS Bold" size="14.0" />
+                           </font></TextArea>
                      </children>
                   </HBox>
                </children>

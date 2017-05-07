@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="aPaneProcesso" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TabProcessosController">
    <children>
-      <TabPane fx:id="tabPaneProcessos" prefHeight="509.0" prefWidth="801.0" tabClosingPolicy="ALL_TABS">
+      <TabPane fx:id="tabPaneProcessos" prefHeight="509.0" prefWidth="801.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab fx:id="tabAbrirNovoProc" text="ABRIR NOVO PROCESSO">
                <content>

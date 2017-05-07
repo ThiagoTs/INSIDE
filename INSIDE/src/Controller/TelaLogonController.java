@@ -86,8 +86,11 @@ public class TelaLogonController implements Initializable{
 
 	@FXML
 	public void limparCampos(ActionEvent event) {
-	
+	 txtUsuario.setText("");
+	 txtSenha.setText("");
+	 txtUsuario.requestFocus();
 	}
+	
 	
 	@FXML
 	public void entrar(ActionEvent event) throws Exception{
@@ -96,14 +99,16 @@ public class TelaLogonController implements Initializable{
 		String msg2 = txtSenha.getText();
 		adm.setLogin(msg);
 		adm = buscaUser();
+		
 		if((adm.getLogin().equals(msg))&&(adm.getSenha().equals(msg2))){
 			
+		painelAdm.pegaAdm(adm);	
 		URL arquivoFXML;
         arquivoFXML = getClass().getResource("/Visao/painelAdm.fxml");
         Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
         panePrincipal.getChildren().clear();
         panePrincipal.getChildren().add(fxmlParent);
-        painelAdm.pegaAdm(adm);
+        
 		}else{
 			msg = "Login ou senha incorretos!";
 			exibeMensagem(msg);
@@ -127,6 +132,19 @@ public class TelaLogonController implements Initializable{
 	@FXML
 	public void help(ActionEvent event) {
 		
+	}
+	public void chamarLogon(){
+		 URL arquivoFXML;
+	        arquivoFXML = getClass().getResource("/Visao/telaLogon.fxml");
+	        Parent fxmlParent = null;
+			try {
+				fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        panePrincipal.getChildren().clear();
+	        panePrincipal.getChildren().add(fxmlParent);
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

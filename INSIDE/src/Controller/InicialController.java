@@ -27,11 +27,14 @@ public class InicialController implements Initializable{
 	private Rectangle imgRetangulo;
 	@FXML 
 	public Pane paneInicial;
-	
-	Main main;
+
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		chamarLogon();
+	}
+	public void chamarLogon(){
 		 URL arquivoFXML;
 	        arquivoFXML = getClass().getResource("/Visao/telaLogon.fxml");
 	        Parent fxmlParent = null;
@@ -44,13 +47,7 @@ public class InicialController implements Initializable{
 	        paneInicial.getChildren().clear();
 	        paneInicial.getChildren().add(fxmlParent);
 	}
-	public void entrar() throws IOException{
-		URL arquivoFXML;
-        arquivoFXML = getClass().getResource("/Visao/painelAdm.fxml");
-        Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
-        paneInicial.getChildren().clear();
-        paneInicial.getChildren().add(fxmlParent);
-	}
+
 	
 	
 
