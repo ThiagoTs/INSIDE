@@ -18,7 +18,7 @@ public class Usuarios {
 	private SimpleStringProperty sexo = new SimpleStringProperty();
 	private SimpleStringProperty cargo = new SimpleStringProperty();
 	private SimpleStringProperty departamento = new SimpleStringProperty();
-	private SimpleIntegerProperty id_Processos = new SimpleIntegerProperty();
+
 	
 	private String senha;
 	private String login;
@@ -65,16 +65,7 @@ public class Usuarios {
 		return id.get();
 		
 	}
-	public SimpleIntegerProperty getId_Processos() {
-		return id_Processos;
-	}
 
-	public void setId_Processos(SimpleIntegerProperty id_Processos) {
-		this.id_Processos = id_Processos;
-	}
-	public void setId_Processos(int id_Processos) {
-		this.id_Processos.set(id_Processos);;
-	}
 
 	public SimpleStringProperty getTipoUserProperty() {
 		return tipoUser;

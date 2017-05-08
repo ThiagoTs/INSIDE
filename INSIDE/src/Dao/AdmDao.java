@@ -26,11 +26,11 @@ public class AdmDao {
 
 
 	String sqlSalvar = "INSERT INTO processos_internos.administradores" +
-			"(nome,CPF,telefone,matricula,email,sexo,cargo,departamentos,login,senha,id_Processos,tipoUser)" +
-			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?)" ;
+			"(nome,CPF,telefone,matricula,email,sexo,cargo,departamentos,login,senha,tipoUser)" +
+			"VALUES(?,?,?,?,?,?,?,?,?,?,?)" ;
 
 
-	public String salvar(Administrador adm,Processo processo) throws SQLException {
+	public String salvar(Administrador adm) throws SQLException {
 
 
 		String salvo = "falha";
@@ -49,8 +49,7 @@ public class AdmDao {
 			stmt.setString(8, adm.getDepartamento());
 			stmt.setString(9, adm.getLogin());
 			stmt.setString(10, adm.getSenha());
-			stmt.setInt(11,processo.getId() );
-			stmt.setString(12, adm.getTipoUser());
+			stmt.setString(11, adm.getTipoUser());
 			
 
 			stmt.executeUpdate();
@@ -99,8 +98,8 @@ public class AdmDao {
 			stmt.setString(8, adm.getDepartamento());
 			stmt.setString(9, adm.getLogin());
 			stmt.setString(10, adm.getSenha());
-			stmt.setString(10, adm.getTipoUser());
-			stmt.setInt(10, adm.getId());
+			stmt.setString(11, adm.getTipoUser());
+			stmt.setInt(12, adm.getId());
 
 
 			stmt.executeUpdate();
@@ -137,7 +136,6 @@ public class AdmDao {
 				adm.setDepartamento(res.getString("departamentos"));
 				adm.setLogin(res.getString("login"));
 				adm.setSenha(res.getString("senha"));
-				adm.setId_Processos(res.getInt("id_Processos"));
 				adm.setTipoUser(res.getString("tipoUser"));
 				
 			

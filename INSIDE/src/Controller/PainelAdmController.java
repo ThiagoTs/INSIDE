@@ -98,7 +98,7 @@ public class PainelAdmController implements Initializable{
 			e.getMessage();
 		}
 		try {
-			System.out.println("To aqui");
+			
 			URL arquivoFXML2;
 			arquivoFXML2 = getClass().getResource("/Visao/tabCadastros.fxml");
 			Parent fxmlParent2 =(Parent) FXMLLoader.load(arquivoFXML2);

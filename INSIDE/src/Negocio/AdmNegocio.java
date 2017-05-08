@@ -16,22 +16,22 @@ import Modelo.Processo;
 public class AdmNegocio {
 	AdmDao admDao = new AdmDao();
 
-    public String salvar(Administrador adm,Processo proc) throws SQLException {
+    public String salvar(Administrador adm) throws SQLException {
 
         boolean cpfValido = false;
         boolean emailValido = false;
         String salvo = "falha";
         StringBuilder sb = new StringBuilder();
-        cpfValido = validaCPF(adm.getCpf());
-        if (!cpfValido) {
-            sb.append("cpf inv·lido. \n");
-        }
+//        cpfValido = validaCPF(adm.getCpf());
+//        if (!cpfValido) {
+//            sb.append("cpf inv·lido. \n");
+//        }
         emailValido = isEmailValid(adm.getEmail());
         if (!emailValido) {
             sb.append("email inv·lido. \n");
         }
         if (sb.toString().isEmpty()) {
-          salvo = admDao.salvar(adm,proc);
+          salvo = admDao.salvar(adm);
         } else {
             sb.append(salvo);
             return sb.toString();
@@ -47,12 +47,12 @@ public class AdmNegocio {
         String salvo = "falha";
         StringBuilder sb = new StringBuilder();
         cpfValido = validaCPF(adm.getCpf());
-        if (!cpfValido) {
-            sb.append("cpf inv√°lido. \n");
-        }
+//        if (!cpfValido) {
+//            sb.append("cpf inv·lido. \n");
+//        }
         emailValido = isEmailValid(adm.getEmail());
         if (!emailValido) {
-            sb.append("email inv√°lido. \n");
+            sb.append("email inv·lido. \n");
         }
         if (sb.toString().isEmpty()) {
             salvo = admDao.Editar(adm);
@@ -64,7 +64,7 @@ public class AdmNegocio {
         return sb.toString();
     }
 
-    public List<Administrador> listarCliente(){
+    public List<Administrador> listarAdms(){
         List<Administrador> adms = new ArrayList<Administrador>();
         adms = admDao.listarAdms();
         return adms;

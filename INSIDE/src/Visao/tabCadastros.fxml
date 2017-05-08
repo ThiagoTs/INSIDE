@@ -158,22 +158,37 @@
                <content>
                   <AnchorPane fx:id="aPaneUser" minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="603.0">
                      <children>
-                        <Label fx:id="lblNome" layoutX="23.0" layoutY="114.0" text="Nome:" />
-                        <Label fx:id="lblCpf" layoutX="437.0" layoutY="149.0" text="CPF:" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="8.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label fx:id="lblCargo" layoutX="23.0" layoutY="252.0" text="Cargo:" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="comoTipoUser" layoutX="116.0" layoutY="292.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o tipo" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <ComboBox fx:id="comboTipoBuscaUser" layoutX="141.0" layoutY="47.0" prefHeight="25.0" prefWidth="145.0" promptText="Selecione um item" />
+                        <TextField fx:id="txtBuscaUser" layoutX="303.0" layoutY="47.0" prefHeight="25.0" prefWidth="275.0" promptText="Insira o nome do usuário" />
+                        <ToggleButton fx:id="btnBuscaUser" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="581.0" layoutY="40.0" mnemonicParsing="false" onAction="#buscarUsuarios" prefHeight="30.0" prefWidth="38.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <image>
+                                    <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                           </graphic>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                        </ComboBox>
-                        <TextField fx:id="txtTelefone" layoutX="116.0" layoutY="149.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <HBox fx:id="hbSexo" layoutX="528.0" layoutY="203.0" prefHeight="28.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        </ToggleButton>
+                        <TextField fx:id="txtNome" layoutX="116.0" layoutY="107.0" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtMatricula" layoutX="528.0" layoutY="107.0" GridPane.columnIndex="3" />
+                        <TextField fx:id="txtUser" layoutX="115.0" layoutY="138.0" />
+                        <TextField fx:id="txtCpf" layoutX="528.0" layoutY="138.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtTelefone" layoutX="116.0" layoutY="169.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <HBox fx:id="hbSexo" layoutX="528.0" layoutY="172.0" prefHeight="28.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <children>
-                              <RadioButton fx:id="rbMasculino" mnemonicParsing="false" selected="true" text="Masculino">
+                              <RadioButton fx:id="rbMasculino" mnemonicParsing="false" selected="false" text="Masculino">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="groupSexo" />
                                  </toggleGroup>
@@ -188,27 +203,25 @@
                               <Insets top="20.0" />
                            </GridPane.margin>
                         </HBox>
-                        <TextField fx:id="txtMatricula" layoutX="528.0" layoutY="107.0" GridPane.columnIndex="3" />
-                        <Label fx:id="lblSexo" layoutX="437.0" layoutY="194.0" text="Sexo:" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                           <GridPane.margin>
-                              <Insets left="8.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label fx:id="lblMatricula" layoutX="437.0" layoutY="107.0" text="Matrícula:" GridPane.columnIndex="2">
-                           <GridPane.margin>
-                              <Insets left="8.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <TextField fx:id="txtEmail" layoutX="116.0" layoutY="194.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="lblTipoUser" layoutX="23.0" layoutY="299.0" text="Tipo de usuário:" GridPane.rowIndex="4" />
-                        <ComboBox fx:id="comboCargo" layoutX="116.0" layoutY="245.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o cargo" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="txtEmail" layoutX="116.0" layoutY="201.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="comboDepart" layoutX="543.0" layoutY="201.0" prefHeight="25.0" prefWidth="205.0" promptText="Selecione o departamento" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
-                        <HBox fx:id="hbCrud" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="308.0" prefHeight="53.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <ComboBox fx:id="comboCargo" layoutX="116.0" layoutY="231.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o cargo" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <ComboBox fx:id="comboTipoUser" layoutX="543.0" layoutY="237.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o tipo" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                        <HBox fx:id="hbCrud" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="295.0" prefHeight="53.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <children>
-                              <Button fx:id="btnExcluirUser" mnemonicParsing="false" onAction="#excluirUsuario" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                              <Button fx:id="btnExcluirUser" disable="true" mnemonicParsing="false" onAction="#excluirUsuario" prefHeight="25.0" prefWidth="58.0" text="Excluir">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -231,20 +244,31 @@
                               </Button>
                            </children>
                         </HBox>
-                        <Label fx:id="lblDepart" layoutX="437.0" layoutY="245.0" text="Departamento:" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <Label fx:id="lblNome" layoutX="23.0" layoutY="114.0" text="Nome:  *" />
+                        <Label fx:id="lblCpf" layoutX="437.0" layoutY="138.0" text="CPF: *" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="8.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblTelefone" layoutX="23.0" layoutY="156.0" text="Telefone:" GridPane.rowIndex="1" />
-                        <TextField fx:id="txtCpf" layoutX="528.0" layoutY="149.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <ComboBox fx:id="comoDepart" layoutX="528.0" layoutY="245.0" prefHeight="25.0" prefWidth="234.0" promptText="Selecione o departamento" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ComboBox>
-                        <TextField fx:id="txtNome" layoutX="116.0" layoutY="107.0" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="1" />
-                        <Label fx:id="lblEmail" layoutX="23.0" layoutY="201.0" text="E-mail:" GridPane.rowIndex="2" />
+                        <Label fx:id="lblCargo" layoutX="23.0" layoutY="238.0" text="Cargo: *" GridPane.rowIndex="3" />
+                        <Label fx:id="lblSexo" layoutX="437.0" layoutY="170.0" text="Sexo:  *" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblMatricula" layoutX="437.0" layoutY="107.0" text="Matrícula: *" GridPane.columnIndex="2">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblTipoUser" layoutX="435.0" layoutY="240.0" text="Tipo de usuário: *" GridPane.rowIndex="4" />
+                        <Label fx:id="lblDepart" layoutX="437.0" layoutY="200.0" text="Departamento:  *" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblTelefone" layoutX="23.0" layoutY="176.0" text="Telefone:" GridPane.rowIndex="1" />
+                        <Label fx:id="lblEmail" layoutX="23.0" layoutY="208.0" text="E-mail: *" GridPane.rowIndex="2" />
                         <Text fx:id="textCadUser" layoutX="253.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO DE USUÁRIOS" textAlignment="CENTER" wrappingWidth="244.52294921875">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -257,27 +281,8 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtBuscaUser" layoutX="303.0" layoutY="47.0" prefHeight="25.0" prefWidth="275.0" promptText="Insira o nome do usuário" />
                         <Separator layoutX="214.0" layoutY="28.0" prefHeight="12.0" prefWidth="322.0" />
-                        <ToggleButton fx:id="btnBuscaUser" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="581.0" layoutY="40.0" mnemonicParsing="false" onAction="#buscarUsuarios" prefHeight="30.0" prefWidth="38.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
-                           <graphic>
-                              <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <image>
-                                    <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                           </graphic>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </ToggleButton>
-                        <ComboBox fx:id="comboTipoBuscaUser" layoutX="141.0" layoutY="47.0" prefHeight="25.0" prefWidth="145.0" promptText="Selecione um item" />
+                        <Label fx:id="lblLogin" layoutX="23.0" layoutY="142.0" text="Usuário:  *" />
                      </children>
                   </AnchorPane>
                </content>

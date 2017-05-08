@@ -118,10 +118,9 @@ public class TelaLogonController implements Initializable{
 
 	private Administrador buscaUser() {
 		
-		listAdm = admNegocio.listarCliente();
+		listAdm = admNegocio.listarAdms();
         listAdm.forEach( adm2 -> {
             if(adm2.getLogin().equals(adm.getLogin())){
-            	System.out.println("Entrei aqui");
             	this.adm = adm2;
             }
                 }
@@ -153,12 +152,12 @@ public class TelaLogonController implements Initializable{
 	}
 	 public void exibeMensagem(String msg){
 	        Notifications.create()
-	                .title("Atenção")
+	                //.title("Atenção")
 	                .text(String.valueOf(msg))
 	                .owner(main)
 	                .hideAfter(Duration.seconds(3))
 	                .darkStyle()
-	                .position(Pos.CENTER)
+	                .position(Pos.TOP_RIGHT)
 	                .showInformation();
 
 
