@@ -13,35 +13,49 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.text.Text;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import javafx.scene.control.TreeTableColumn;
 
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 import org.controlsfx.control.Notifications;
 
 import com.sun.javafx.scene.layout.region.BorderStyleConverter;
 
+
 import Modelo.Administrador;
+import Modelo.Documentos;
 import Modelo.Processo;
 import Negocio.AdmNegocio;
+import Negocio.DocumentosNegocio;
 import application.Main;
 import javafx.animation.RotateTransition;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.TabPane;
-
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.ToggleButton;
@@ -69,8 +83,6 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private ToggleButton btnAddDocTab;
 	@FXML
-	private Label lblDescricao;
-	@FXML
 	private HBox hbCrudProc;
 	@FXML
 	private Button btnExcluirProc;
@@ -79,17 +91,17 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private Button btnSalvarProc;
 	@FXML
-	private TreeTableView tblFluxoProc;
+	private TableColumn<Documentos,String> colunDocs;
 	@FXML
-	private TreeTableColumn colunFluxo;
+	private TableView<Documentos> tblDocs;
 	@FXML
-	private TreeTableView tblDocumentos;
+	private TableColumn<Documentos,String> colunCadDoc;
 	@FXML
-	private TreeTableColumn colunDocumentos;
+	private TableView<Documentos> tblCadDoc;
 	@FXML
-	private Label lblNomeProc;
+	private TableColumn<Administrador,String> colunCadFluxo;
 	@FXML
-	private Label lblBuscaResponsavel;
+	private TableView<Administrador> tblCadFluxo;
 	@FXML
 	private HBox hbBuscaResp;
 	@FXML
@@ -99,25 +111,15 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private TextField txtNomeProc;
 	@FXML
-	private Label lblDocumento;
-	@FXML
 	private Text textCadTipoProc;
 	@FXML
 	private TextArea txtDescricao;
-	@FXML
-	private Label txtBuscaProc;
 	@FXML
 	private ComboBox comboTiposProc;
 	@FXML
 	private Tab tabUsuario;
 	@FXML
 	private AnchorPane aPaneUser;
-	@FXML
-	private Label lblNome;
-	@FXML
-	private Label lblCpf;
-	@FXML
-	private Label lblCargo;
 	@FXML
 	private ComboBox comboTipoUser;
 	@FXML
@@ -133,13 +135,7 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private TextField txtMatricula;
 	@FXML
-	private Label lblSexo;
-	@FXML
-	private Label lblMatricula;
-	@FXML
 	private TextField txtEmail;
-	@FXML
-	private Label lblTipoUser;
 	@FXML
 	private ComboBox comboCargo;
 	@FXML
@@ -149,23 +145,13 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private Button btnSalvarUser;
 	@FXML
-	private Label lblDepart;
-	@FXML
-	private Label lblTelefone;
-	@FXML
 	private TextField txtCpf;
 	@FXML
 	private ComboBox comboDepart;
 	@FXML
 	private TextField txtNome;
 	@FXML
-	private Label lblEmail;
-	@FXML
 	private Text textCadUser;
-	@FXML
-	private Label lblBuscaUser;
-	@FXML
-	private Label lblLogin;
 	@FXML
 	private TextField txtUser;
 	@FXML
@@ -181,13 +167,7 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private AnchorPane aPaneDoc;
 	@FXML
-	private Label lblNomeDoc;
-	@FXML
 	private TextField txtNomeDoc;
-	@FXML
-	private TreeTableView tblListDocumentos;
-	@FXML
-	private TreeTableColumn colunListDocumentos;
 	@FXML
 	private HBox hbCrudDoc;
 	@FXML
@@ -208,6 +188,11 @@ public class TabCadastrosController implements Initializable {
 	Administrador adm = new Administrador();
 	Main main = null;
 	Processo proc = new Processo();
+	Documentos doc = new Documentos();
+	ObservableList<Documentos> docView = null;
+	List<Documentos> docList = new ArrayList<>();
+	DocumentosNegocio docNegocio = new DocumentosNegocio();
+	int cont=0;
 
 
 	@Override
@@ -217,6 +202,7 @@ public class TabCadastrosController implements Initializable {
 		preencherTipoUser();
 		preencherTipoCargo();
 		btnAlterarUser.setDisable(true);
+		populaViewDocs();
 	}
 
 
@@ -241,7 +227,7 @@ public class TabCadastrosController implements Initializable {
 		adm.setDepartamento(comboDepart.getValue().toString());
 		adm.setTipoUser(comboTipoUser.getValue().toString());
 		if(adm.getId()==0){
-		adm.setSenha("123456");
+			adm.setSenha("123456");
 		}
 	}
 
@@ -284,6 +270,7 @@ public class TabCadastrosController implements Initializable {
 		exibeMensagem(msg);
 		btnSalvarUser.setDisable(false);
 		btnAlterarUser.setDisable(true);
+		btnExcluirUser.setDisable(true);
 		ablitarCamposUser();
 	}
 
@@ -299,14 +286,14 @@ public class TabCadastrosController implements Initializable {
 		btnAlterarUser.setDisable(false);
 		txtBuscaUser.setText("");
 		comboTipoBuscaUser.setValue("Selecione um item");
-		
+
 	}
 	public void verificarTipoBusca(){
 		adm = new Administrador();
 		listAdm = new ArrayList();
 		String tipo = comboTipoBuscaUser.getValue().toString();
 		listAdm = listarAdms();
-		
+
 		if(tipo.equals("Nome")){
 			listAdm.forEach( adm2 -> {
 				if(adm2.getNome().equals(txtBuscaUser.getText())){
@@ -405,15 +392,15 @@ public class TabCadastrosController implements Initializable {
 		txtTelefone.setText(adm.getTelefone());
 		txtMatricula.setText(adm.getMatricula());
 		if(adm.getSexo().equals("Masculino")) {
-            groupSexo.selectToggle(rbMasculino);
-        }else{
-            groupSexo.selectToggle(rbFeminino);
-        }
+			groupSexo.selectToggle(rbMasculino);
+		}else{
+			groupSexo.selectToggle(rbFeminino);
+		}
 		txtEmail.setText(adm.getEmail());
 		comboCargo.setValue(adm.getCargo());
 		comboDepart.setValue(adm.getDepartamento());
 		comboTipoUser.setValue(adm.getTipoUser());
-		
+
 		txtNome.setEditable(false);
 		txtCpf.setEditable(false);
 		txtUser.setEditable(false);
@@ -427,10 +414,10 @@ public class TabCadastrosController implements Initializable {
 		comboTipoUser.setDisable(true);
 		btnSalvarUser.setDisable(true);
 		btnExcluirUser.setDisable(false);
-		
+
 	}
 	public void ablitarCamposUser(){
-		
+
 		txtNome.setEditable(true);
 		txtCpf.setEditable(true);
 		txtUser.setEditable(true);
@@ -509,11 +496,100 @@ public class TabCadastrosController implements Initializable {
 	//				);
 	//		return listaCargos;
 	//	}
+	//--------------------------------------DOCUMENTOS-------------------------------------------//
+
+
+	@FXML
+	public void addDocumentoLista(ActionEvent event) {
+		boolean validar;
+		validar= validarDocs(txtNomeDoc.getText());
+		if(validar){
+			Documentos doc = new Documentos();
+			//		String nomeDoc=txtNomeDoc.getText();
+			doc.setNome(txtNomeDoc.getText());
+			docList.add(doc);
+			colunDocs.setCellValueFactory(new PropertyValueFactory<Documentos, String>("nome"));
+			docView = FXCollections.observableArrayList(docList);
+			tblDocs.getItems().removeAll();
+			tblDocs.setItems(docView);
+			String msg = "Documento inserido!";
+			exibeMensagem(msg);
+			limparCamposDoc();
+		}else{
+			String msg = "O documento ja existe na lista!";
+			exibeMensagem(msg);
+			limparCamposDoc();
+		}
+	}
+	@FXML
+	public void salvarDocumentoList() {
+		
+		docList.forEach(doc ->{
+			String validar="";
+			
+			if(doc.getId()==null){
+				try {
+					validar=docNegocio.salvar(doc);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				if(validar.equals("salvo")){
+					populaViewDocs();
+					if(cont<1){
+						String msg = "Documentos salvos com sucesso!";
+						exibeMensagem(msg);
+						cont++;
+					}
+				}else{
+					exibeMensagem("Falha!!!");
+				}
+			}
+
+		});
+	}
+	@FXML
+	public void limparCamposDoc(){
+		txtNomeDoc.setText("");
+	}
+	public boolean validarDocs(String nome){
+		boolean resp = false;
+
+		for(int i=0;i<docList.size();i++){
+			if(docList.get(i).getNome().equals(nome)){
+				return resp;
+			}
+		}
+
+		return resp = true;
+	}
+
+
+	public void populaViewDocs(){
+		this.docList = docNegocio.listarDocs();
+		colunDocs.setCellValueFactory(new PropertyValueFactory<Documentos, String>("nome"));
+		docView = FXCollections.observableArrayList(docList);
+		tblDocs.getItems().removeAll();
+		tblDocs.setItems(docView);
+
+	}
+
+	@FXML
+	public void addDocumentoTabela(ActionEvent event) {
+
+
+	}
+
+
+
+
+
+
+
+
 
 	public void exibeMensagem(String msg){
 
 		Notifications.create()
-		// .title("Atenção")
 		.text(String.valueOf(msg))
 		.owner(main )
 		.hideAfter(Duration.seconds(3))
@@ -541,11 +617,8 @@ public class TabCadastrosController implements Initializable {
 		}
 	}
 
-	// Event Listener on ToggleButton[#btnAddDocTab].onAction
-	@FXML
-	public void addDocumentoTabela(ActionEvent event) {
-		// TODO Autogenerated
-	}
+
+
 	// Event Listener on Button[#btnExcluirProc].onAction
 	@FXML
 	public void excluirProcesso(ActionEvent event) {
@@ -580,15 +653,9 @@ public class TabCadastrosController implements Initializable {
 		// TODO Autogenerated
 	}
 	// Event Listener on Button[#btnSalvarDoc].onAction
-	@FXML
-	public void salvarDocumentoList(ActionEvent event) {
-		// TODO Autogenerated
-	}
+
 	// Event Listener on ToggleButton[#btnAddDoc].onAction
-	@FXML
-	public void addDocumentoLista(ActionEvent event) {
-		// TODO Autogenerated
-	}
+
 
 
 
