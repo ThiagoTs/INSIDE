@@ -304,14 +304,6 @@
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnAlterarDoc" cancelButton="true" mnemonicParsing="false" onAction="#editarDocumentoList" prefHeight="25.0" prefWidth="60.0" text="Alterar">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <HBox.margin>
-                                    <Insets right="5.0" />
-                                 </HBox.margin>
-                              </Button>
                               <Button fx:id="btnSalvarDoc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarDocumentoList" prefHeight="25.0" prefWidth="60.0" text="Salvar">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />

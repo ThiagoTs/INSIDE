@@ -102,7 +102,6 @@ public class TelaLogonController implements Initializable{
 		String msg2 = txtSenha.getText();
 		adm.setLogin(msg);
 		adm = buscaUser();
-		List<Control>  controls = new ArrayList<>();
 
 		if((adm.getLogin().equals(msg))&&(adm.getSenha().equals(msg2))){	
 			painelAdm.pegaAdm(adm);	
@@ -115,15 +114,6 @@ public class TelaLogonController implements Initializable{
 		}else{
 			msg = "Usuário ou senha incorretos!";
 			exibeMensagem(msg);
-		}
-		if(msg.equals("")){
-			sb.append("Digite o nome do usuário. \n");
-			controls.add(txtUsuario);
-		}else{
-			if(msg2.equals("")){
-				sb.append("Digite sua senha. \n");
-				controls.add(txtSenha);
-			}
 		}
 
 	}
@@ -182,7 +172,6 @@ public class TelaLogonController implements Initializable{
 
 	public void exibeMensagem(String msg){
 		Notifications.create()
-		//.title("Atenção")
 		.text(String.valueOf(msg))
 		.owner(main)
 		.hideAfter(Duration.seconds(3))

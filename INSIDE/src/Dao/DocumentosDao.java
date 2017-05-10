@@ -90,6 +90,25 @@ public class DocumentosDao {
 
 		return salvo;
 	}
+	public String excluir(Documentos doc) {
+		String excluido = "falha";
+		try {
+			String sql;
+			sql  = " DELETE FROM documentos where id=?";
+
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, doc.getId());
+
+
+			stmt.executeUpdate();
+			excluido = "excluido";
+
+		} catch (SQLException e) {
+			System.out.println("Erro na alteracao:" + e.getMessage());
+		}
+
+		return excluido;
+	}
 	public List<Documentos> listarDocs() {
 		List<Documentos> list = new ArrayList<Documentos>();
 		ResultSet res = null;
