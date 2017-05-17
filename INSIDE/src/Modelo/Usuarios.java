@@ -24,7 +24,7 @@ public class Usuarios {
 	private String login;
 	
 	
-	private List<Processo> procPendentes = new ArrayList<Processo>();
+	private List<TipoProcesso> procPendentes = new ArrayList<TipoProcesso>();
 	
 	
 	public Usuarios(SimpleIntegerProperty id, SimpleStringProperty tipoUser, SimpleStringProperty nome,
@@ -45,10 +45,10 @@ public class Usuarios {
 		this.login = login;
 	}
 	
-	public List<Processo> getProcPendentes() {
+	public List<TipoProcesso> getProcPendentes() {
 		return procPendentes;
 	}
-	public void setProcPendentes(List<Processo> procPendentes) {
+	public void setProcPendentes(List<TipoProcesso> procPendentes) {
 		this.procPendentes = procPendentes;
 	}
 	public Usuarios(){}

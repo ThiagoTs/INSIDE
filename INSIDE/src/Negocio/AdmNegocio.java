@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import Dao.AdmDao;
 import Modelo.Administrador;
-import Modelo.Processo;
+import Modelo.TipoProcesso;
 
 
 

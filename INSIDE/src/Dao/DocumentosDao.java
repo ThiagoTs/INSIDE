@@ -10,6 +10,7 @@ import java.util.List;
 
 import Modelo.Administrador;
 import Modelo.Documentos;
+import Modelo.TipoProcesso;
 import daoUtil.ConnectionFactory;
 
 public class DocumentosDao {
@@ -25,10 +26,14 @@ public class DocumentosDao {
 	}
 	
 	String sqlSalvar = "INSERT INTO processos_internos.documentos" +
-			"(nome,arquivo)" +
-			"VALUES(?,?)" ;
+			"(nome)" +
+			"VALUES(?)" ;
 
+	String sqlSalvarRelacDoc = "insert into procDoc" +
+            "(id_Documento, id_Processo)" +
+            "values(?,?);";
 
+	
 	public String salvar(Documentos doc) throws SQLException {
 
 
@@ -39,7 +44,6 @@ public class DocumentosDao {
 			con.setAutoCommit(false);
 			stmt = con.prepareStatement(sqlSalvar);
 			stmt.setString(1, doc.getNome());
-			stmt.setString(2, doc.getArquivo());
 			
 
 			stmt.executeUpdate();
@@ -67,17 +71,57 @@ public class DocumentosDao {
 
 		return salvo;
 	}
+	public String salvarRelaciDoc(Documentos doc,TipoProcesso tiProc) throws SQLException {
+
+
+		String salvo = "falha";
+
+
+		try {
+			con.setAutoCommit(false);
+			stmt = con.prepareStatement(sqlSalvarRelacDoc);
+			stmt.setInt(1, doc.getId());
+			stmt.setInt(2, tiProc.getId());
+			
+
+			stmt.executeUpdate();
+
+			//Grava as informaÃ§Ãµes se caso de problema os dados nÃ£o sÃ£o gravados
+			salvo = "salvo";
+
+		} catch (SQLException e ) {
+			if (con != null) {
+				try {
+					System.err.print("Rollback efetuado na transação DOC");
+					con.rollback();
+				} catch(SQLException e2) {
+					System.err.print("Erro na transação DOC!"+e2);
+					salvo = "\"Erro na transação!\"+e2";
+				}
+			}
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+			
+		}
+
+		return salvo;
+	}
+	public void darComiteDoc() throws SQLException{
+		this.con.commit();
+		con.setAutoCommit(true);
+	}
 	public String  Editar(Documentos doc) {
 		String salvo = "falha";
 		try {
 			String sql;
-			sql  = "UPDATE documentos SET nome = ?, arquivo= ?";
+			sql  = "UPDATE documentos SET nome = ?";
 			sql += "WHERE id = ?";
 
 			stmt = con.prepareStatement(sql);
 
 			stmt.setString(1, doc.getNome());
-			stmt.setString(2, doc.getArquivo());
 			stmt.setInt(3, doc.getId());
 
 
@@ -124,7 +168,6 @@ public class DocumentosDao {
 				
 				doc.setId(res.getInt("id"));
 				doc.setNome(res.getString("nome"));
-				doc.setArquivo(res.getString("arquivo"));
 				
 
 				list.add(doc);

@@ -4,22 +4,23 @@ package Modelo;
 
 public class Documentos {
 	
-	private Integer id;
+	private int id;
 	private String nome;
 	private String arquivo;
 	
-	public Documentos(Integer id,String nome, String arquivo) {
+	public Documentos(int id,String nome, String arquivo) {
 		this.id = id;
 		this.nome = nome;
 		this.arquivo = arquivo;
 	}
 	public Documentos(){}
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
+	
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

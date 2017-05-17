@@ -32,7 +32,9 @@ import javafx.scene.control.Tooltip;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -45,9 +47,11 @@ import com.sun.javafx.scene.layout.region.BorderStyleConverter;
 
 import Modelo.Administrador;
 import Modelo.Documentos;
-import Modelo.Processo;
+import Modelo.TipoProcesso;
+import Modelo.Responsavel;
 import Negocio.AdmNegocio;
 import Negocio.DocumentosNegocio;
+import Negocio.ProcessosNegocio;
 import application.Main;
 import javafx.animation.RotateTransition;
 import javafx.beans.property.SimpleStringProperty;
@@ -88,10 +92,6 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private HBox hbCrudProc;
 	@FXML
-	private Button btnExcluirProc;
-	@FXML
-	private Button btnAlterarProc;
-	@FXML
 	private Button btnSalvarProc;
 	@FXML
 	private TableColumn<Documentos,String> colunDocs;
@@ -108,7 +108,7 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private HBox hbBuscaResp;
 	@FXML
-	private TextField txtBuscResp;
+	private ComboBox<String> comboUser;
 	@FXML
 	private ToggleButton btnAddResp;
 	@FXML
@@ -158,13 +158,11 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private TextField txtUser;
 	@FXML
-	private TextField txtBuscaUser;
-	@FXML
 	private TextField txtEnderco;
 	@FXML
 	private ToggleButton btnBuscaUser;
 	@FXML
-	private ComboBox comboTipoBuscaUser;
+	private ComboBox comboBuscaUser;
 	@FXML
 	private Tab tabDocumentos;
 	@FXML
@@ -184,36 +182,37 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private Button btnExcluirUser;
 
-	List<Administrador> listAdm =  new ArrayList();
+	List<Administrador> listAdm =  new ArrayList<>();
+	List<Administrador> listAdm2 =  new ArrayList<>();
 	AdmNegocio admNegocio = new AdmNegocio();
 	Administrador adm = new Administrador();
 	Main main = null;
-	Processo proc = new Processo();
+	TipoProcesso tiProc = new TipoProcesso();
+	ProcessosNegocio procNeg = new ProcessosNegocio();
 	Documentos doc = new Documentos();
 	ObservableList<Documentos> docView = null;
+	ObservableList<Administrador> userView = null;
 	List<Documentos> docList = new ArrayList<>();
 	List<Documentos> docList2 = new ArrayList<>();
 	DocumentosNegocio docNegocio = new DocumentosNegocio();
+
+
+
 	int cont=0;
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		preencherTipoPesquisa();
 		preencherDepartamento();
 		preencherTipoUser();
 		preencherTipoCargo();
 		btnAlterarUser.setDisable(true);
 		populaViewDocs();
 		populaComboDoc();
-	}
-
-
-
-	@FXML
-	public void salvarProcesso(ActionEvent event) {
+		preencherComboFluxo();
 
 	}
+
 
 	private void pegaValores(Administrador adm) {
 
@@ -265,7 +264,7 @@ public class TabCadastrosController implements Initializable {
 				}
 			}
 		}
-
+		preencherComboFluxo();
 	}
 	@FXML
 	public void editarUsuario(ActionEvent event) {
@@ -277,51 +276,27 @@ public class TabCadastrosController implements Initializable {
 		ablitarCamposUser();
 	}
 
-	public List<Administrador> listarAdms(){
+	public void listarAdms(){
 		this.listAdm= admNegocio.listarAdms();
-		return listAdm;
 	}
 
 	@FXML
 	public void buscarUsuarios(ActionEvent  event)throws Exception {
-		verificarTipoBusca();
+		adm = new Administrador();
+		String nome = comboBuscaUser.getValue().toString();
+		listarAdms();
+		listAdm.forEach( adm2 -> {
+			if(adm2.getNome().equals(nome)){
+				this.adm=adm2;
+			}
+		}	);
+		
 		setarValores();
 		btnAlterarUser.setDisable(false);
-		txtBuscaUser.setText("");
-		comboTipoBuscaUser.setValue("Selecione um item");
+		comboBuscaUser.setValue("Selecione um item");
 
 	}
-	public void verificarTipoBusca(){
-		adm = new Administrador();
-		listAdm = new ArrayList();
-		String tipo = comboTipoBuscaUser.getValue().toString();
-		listAdm = listarAdms();
-
-		if(tipo.equals("Nome")){
-			listAdm.forEach( adm2 -> {
-				if(adm2.getNome().equals(txtBuscaUser.getText())){
-					this.adm=adm2;
-				}
-			}	);
-		}else{
-			if(tipo.equals("CPF")){
-				listAdm.forEach( adm2 -> {
-					if(adm2.getCpf().equals(txtBuscaUser.getText())){
-						this.adm=adm2;
-					}
-				}	);
-			}else{
-				if(tipo.equals("Matrícula")){
-					listAdm.forEach( adm2 -> {
-						if(adm2.getMatricula().equals(txtBuscaUser.getText())){
-							this.adm=adm2;
-						}
-					}	);
-				}
-			}
-		}
-
-	}
+	
 	public boolean validarCampos(){
 
 		String nome =  txtNome.getText();
@@ -404,6 +379,12 @@ public class TabCadastrosController implements Initializable {
 		comboDepart.setValue(adm.getDepartamento());
 		comboTipoUser.setValue(adm.getTipoUser());
 
+		desabilitarCamposUser();
+
+
+	}
+	public void desabilitarCamposUser(){
+
 		txtNome.setEditable(false);
 		txtCpf.setEditable(false);
 		txtUser.setEditable(false);
@@ -417,7 +398,6 @@ public class TabCadastrosController implements Initializable {
 		comboTipoUser.setDisable(true);
 		btnSalvarUser.setDisable(true);
 		btnExcluirUser.setDisable(false);
-
 	}
 	public void ablitarCamposUser(){
 
@@ -448,15 +428,6 @@ public class TabCadastrosController implements Initializable {
 		txtNome.requestFocus();
 	}
 
-	@FXML
-	public void preencherTipoPesquisa(){
-
-		List<String> tipo= new ArrayList<String>();
-		tipo.add("Nome");
-		tipo.add("CPF");
-		tipo.add("Matrícula");
-		comboTipoBuscaUser.getItems().addAll(tipo);
-	}
 	@FXML
 	public void preencherDepartamento(){
 
@@ -533,7 +504,7 @@ public class TabCadastrosController implements Initializable {
 		docList.forEach(doc ->{
 			String validar="";
 
-			if(doc.getId()==null){
+			if(doc.getId()==0){
 				try {
 					validar=docNegocio.salvar(doc);
 				} catch (SQLException e) {
@@ -553,14 +524,15 @@ public class TabCadastrosController implements Initializable {
 
 		});
 		cont=0;
+		populaComboDoc();
 	}
 	@FXML
 	public void excluirDocumentosList(ActionEvent event) throws SQLException {
 		doc = new Documentos();
 		doc =  tblDocs.getSelectionModel().getSelectedItem();
 		String validar="";
-		if(doc.getId().equals(null)){
-			tblCadDoc.getItems().remove(doc);
+		if(doc.getId()==0){
+			tblDocs.getItems().remove(doc);
 			exibeMensagem("Documento excluido da lista!");
 		}else{
 			validar=docNegocio.excluir(doc);
@@ -572,6 +544,7 @@ public class TabCadastrosController implements Initializable {
 				exibeMensagem("Falha!!!");
 			}
 		}
+		populaComboDoc();
 	}
 	@FXML
 	public void limparCamposDoc(){
@@ -602,7 +575,6 @@ public class TabCadastrosController implements Initializable {
 		docList.forEach( doc1 -> {
 			comboDocumentos.getItems().add(doc1.getNome());
 		}
-
 				);
 	}
 
@@ -611,8 +583,8 @@ public class TabCadastrosController implements Initializable {
 		String nomeDoc= (String) comboDocumentos.getSelectionModel().getSelectedItem();
 		listarDoc(nomeDoc);
 
-		if(!doc.getNome().equals("")||doc.getNome().equals(null)){
-			if(validarDocs(nomeDoc)){
+		if(!doc.getNome().equals(null)){
+			if(validarDocsProc(nomeDoc)){
 				docList2.add(doc);
 				colunCadDoc.setCellValueFactory(new PropertyValueFactory<Documentos, String>("nome"));
 				docView = FXCollections.observableArrayList(docList2);
@@ -620,7 +592,11 @@ public class TabCadastrosController implements Initializable {
 				tblCadDoc.setItems(docView);
 				comboDocumentos.setValue("Selecione um item");
 				doc=null;
+			}else{
+				exibeMensagem("O documentos ja está na lista!");
 			}
+		}else{
+			exibeMensagem("Selecione um documentos!");
 		}
 	}
 	public void listarDoc(String nome){
@@ -630,16 +606,83 @@ public class TabCadastrosController implements Initializable {
 				doc = doc1;
 			}
 		}
-
 				);
+	}
+	public boolean validarDocsProc(String nome){
+		boolean resp = false;
 
+		for(int i=0;i<docList2.size();i++){
+			if(docList2.get(i).getNome().equals(nome)){
+				return resp;
+			}
+		}
+		return resp = true;
+	}
+	@FXML
+	public void excluirDocumentosListProc(ActionEvent event) throws SQLException {
+		doc = new Documentos();
+		doc =  tblCadDoc.getSelectionModel().getSelectedItem();
+		tblCadDoc.getItems().remove(doc);
+		exibeMensagem("Documento excluido da lista!");
+	}
+	public void preencherComboFluxo(){
+		listAdm = admNegocio.listarAdms();
+
+		listAdm.forEach( adm1 -> {
+			comboUser.getItems().add(adm1.getNome());
+			comboBuscaUser.getItems().add(adm1.getNome());
+		}
+				);
+	}
+	@FXML
+	public void addResponsavelFluxo(ActionEvent event) {
+		String nomeUser= comboUser.getSelectionModel().getSelectedItem();
+		listarUser(nomeUser);
+	
+
+		if(!adm.getNome().equals(null)){
+			listAdm2.add(adm);
+			colunCadFluxo.setCellValueFactory(new PropertyValueFactory<Administrador, String>("nome"));
+			userView = FXCollections.observableArrayList(listAdm2);
+			tblCadFluxo.getItems().removeAll();
+			tblCadFluxo.setItems(userView);
+			comboUser.setValue("Selecione um item");
+			adm=null;
+			
+		}else{
+			exibeMensagem("Selecione um usuário!");
+		}
 	}
 
+	@FXML
+	public void excluirFluxo(ActionEvent event) {
+		adm = new Administrador();
+		adm =  tblCadFluxo.getSelectionModel().getSelectedItem();
+		tblCadFluxo.getItems().remove(adm);
+		exibeMensagem("Usuário excluido da lista!");
+	}
+	public void listarUser(String nome){
 
+		listAdm.forEach( adm1 -> {
+			if(adm1.getNome().equals(nome)){
+				this.adm=adm1;
+			}
+		}
+				);
+	}
 
-
-
-
+	@FXML
+	public void salvarProcesso(ActionEvent e) throws SQLException{
+		String salvo = "falha!";
+		tiProc.setNome(txtNomeProc.getText());
+		tiProc.setDescricao(txtDescricao.getText());
+		salvo= procNeg.salvar(tiProc,listAdm2,docList2);
+		if(salvo.equals("salvo")){
+			exibeMensagem("Tipo de processo salvo com sucesso!");
+		}
+		
+		
+	}
 
 
 	public void exibeMensagem(String msg){
@@ -674,32 +717,17 @@ public class TabCadastrosController implements Initializable {
 
 
 
+
 	// Event Listener on Button[#btnExcluirProc].onAction
-	@FXML
-	public void excluirProcesso(ActionEvent event) {
-		// TODO Autogenerated
-	}
-	// Event Listener on Button[#btnAlterarProc].onAction
-	@FXML
-	public void editarProcesso(ActionEvent event) {
-		// TODO Autogenerated
-	}
 
 
-	// Event Listener on ToggleButton[#btnAddResp].onAction
-	@FXML
-	public void addResponsavelFluxo(ActionEvent event) {
-		// TODO Autogenerated
-	}
+
 
 	// Event Listener on ToggleButton[#btnBuscaUser].onAction
 
 	public void excluirUsuario(ActionEvent event){
 
 	}
-	// Event Listener on Button[#btnExcluirDoc].onAction
-
-	// Event Listener on Button[#btnAlterarDoc].onAction
 
 
 

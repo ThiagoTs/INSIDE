@@ -22,7 +22,7 @@ public class Aluno {
 	private SimpleStringProperty city = new SimpleStringProperty();
 	private Date dataNasci;
 	
-	private List<Processo> processos = new ArrayList<Processo>();
+	private List<TipoProcesso> processos = new ArrayList<TipoProcesso>();
 	private List<Documentos> documentos = new ArrayList<Documentos>();
 	
 	
@@ -47,8 +47,11 @@ public class Aluno {
 	
 	public Aluno(){}
 
-	public SimpleIntegerProperty getId() {
+	public SimpleIntegerProperty getIdProperty() {
 		return id;
+	}
+	public int getId(){
+		return this.id.get();
 	}
 
 	public void setId(SimpleIntegerProperty id) {
@@ -143,11 +146,11 @@ public class Aluno {
 		this.dataNasci = dataNasci;
 	}
 
-	public List<Processo> getProcessos() {
+	public List<TipoProcesso> getProcessos() {
 		return processos;
 	}
 
-	public void setProcessos(List<Processo> processos) {
+	public void setProcessos(List<TipoProcesso> processos) {
 		this.processos = processos;
 	}
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Modelo.Administrador;
-import Modelo.Processo;
+import Modelo.TipoProcesso;
 import daoUtil.ConnectionFactory;
 
 public class AdmDao {
