@@ -16,7 +16,7 @@
          <children>
             <Label fx:id="lblEmail" layoutX="24.0" layoutY="113.0" text="E-mail:" />
             <Label fx:id="lblNome" layoutX="24.0" layoutY="51.0" text="Nome:" />
-            <TextField fx:id="txtResponsavel" editable="false" layoutX="478.0" layoutY="160.0" prefHeight="25.0" prefWidth="256.0" />
+            <TextField fx:id="txtResponsavel" editable="false" layoutX="478.0" layoutY="160.0" prefHeight="25.0" prefWidth="279.0" />
             <Label fx:id="lblTelefone" layoutX="24.0" layoutY="84.0" text="Telefone:" />
             <Label fx:id="lblMatricula" layoutX="383.0" layoutY="51.0" text="Matrícula:" />
             <TextField fx:id="txtEndereco" editable="false" layoutX="85.0" layoutY="164.0" prefHeight="25.0" prefWidth="271.0" />
@@ -24,18 +24,24 @@
             <Label fx:id="lblDataNasc" layoutX="383.0" layoutY="138.0" text="Data nascimento:" />
             <HBox fx:id="hbCrud" alignment="CENTER" layoutX="588.0" layoutY="189.0" prefHeight="45.0" prefWidth="162.0">
                <children>
-                  <Button fx:id="btnAlterar" cancelButton="true" mnemonicParsing="false" onAction="#editarProcesso" prefHeight="25.0" prefWidth="60.0" text="Alterar">
+                  <Button fx:id="btnAlterar" cancelButton="true" mnemonicParsing="false" onAction="#editarProcesso" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: orange;" text="Alterar" textFill="#fcf9f9">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="btnSalvar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarProcesso" prefHeight="25.0" prefWidth="60.0" text="Salvar">
+                  <Button fx:id="btnSalvar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarProcesso" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: green;" text="Salvar" textFill="#fcf9f9">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>
@@ -46,7 +52,7 @@
             <TextField fx:id="txtCity" editable="false" layoutX="85.0" layoutY="195.0" />
             <HBox fx:id="hbSexo" disable="true" layoutX="478.0" layoutY="104.0" prefHeight="29.0" prefWidth="200.0">
                <children>
-                  <RadioButton fx:id="rbMasculino" mnemonicParsing="false" selected="true" text="Masculino">
+                  <RadioButton fx:id="rbMasculino" mnemonicParsing="false" text="Masculino">
                      <toggleGroup>
                         <ToggleGroup fx:id="groupSexo" />
                      </toggleGroup>
@@ -67,9 +73,9 @@
             <TextField fx:id="txtMatricula" editable="false" layoutX="478.0" layoutY="43.0" />
             <TextField fx:id="txtEmail" editable="false" layoutX="85.0" layoutY="105.0" />
             <Separator layoutX="18.0" layoutY="14.0" prefHeight="25.0" prefWidth="775.0" />
-            <HBox fx:id="hbAbrirCancel" layoutX="566.0" layoutY="423.0">
+            <HBox fx:id="hbAbrirCancel" layoutX="576.0" layoutY="422.0">
                <children>
-                  <Button fx:id="btnAbrirNovoPoc" layoutX="560.0" layoutY="423.0" mnemonicParsing="false" onAction="#abrirNovoProcesso" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: green;" text="ABRIR NOVO" textFill="WHITE">
+                  <Button fx:id="btnCancelar" layoutX="670.0" layoutY="423.0" mnemonicParsing="false" onAction="#abrirNovoProcesso" prefHeight="29.0" prefWidth="84.0" style="-fx-background-color: #c94747;" text="CANCELAR" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -80,33 +86,34 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnCancelar" layoutX="670.0" layoutY="423.0" mnemonicParsing="false" onAction="#abrirNovoProcesso" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: RED;" text="CANCELAR" textFill="WHITE">
+                  <Button fx:id="btnAbrirNovoPoc" layoutX="560.0" layoutY="423.0" mnemonicParsing="false" onAction="#abrirNovoProcesso" prefHeight="28.0" prefWidth="92.0" style="-fx-background-color: green;" text="ABRIR NOVO" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Button>
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <TableView fx:id="tabProceAluno" layoutX="32.0" layoutY="237.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="730.0">
+            <TableView fx:id="tabProceAluno" layoutX="32.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="730.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
                <columns>
-                  <TableColumn fx:id="tblBuscAlun" editable="false" prefWidth="729.0" text="PROCESSOS ABERTOS">
-                     <columns>
-                        <TableColumn fx:id="colunProtocologo" editable="false" prefWidth="161.0" text="Protocolo" />
-                        <TableColumn fx:id="colunNome" editable="false" prefWidth="348.0" text="Nome" />
-                        <TableColumn fx:id="colunStatus" editable="false" prefWidth="220.0" text="Status" />
-                     </columns>
-                  </TableColumn>
+                  <TableColumn fx:id="colunProtocologo" editable="false" prefWidth="118.0" text="Protocolo" />
+                  <TableColumn fx:id="colunNome" editable="false" prefWidth="359.0" text="Nome" />
+                  <TableColumn fx:id="colunStatus" editable="false" prefWidth="252.0" text="Status" />
                </columns>
-               <effect>
-                  <SepiaTone level="0.35" />
-               </effect>
             </TableView>
+            <Button layoutX="32.0" layoutY="232.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="729.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="PROCESSOS ABERTOS" textAlignment="CENTER" textFill="#111111">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <ToggleButton fx:id="btnBuscar" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="558.0" layoutY="58.0" mnemonicParsing="false" onAction="#buscarAluno" prefHeight="30.0" prefWidth="38.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">

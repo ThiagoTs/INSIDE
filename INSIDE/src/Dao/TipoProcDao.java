@@ -33,10 +33,9 @@ public class TipoProcDao {
             "(id_Processo, id_Adm)" +
             "values(?,?);";
 	String sqlListarProc = "select * from tipoproc;";
-	
-    String sqlListarAdm = "select  adm.nome as nomeUser ,proc.* from admProc adp inner join "
-    		+ "administradores adm on adp.id_Adm=? and adm.id=? inner join tipoproc proc on adp.id_Processo=proc.id;";
-
+    
+    String sqlListarAdmsTipo = "select administradores.nome,tipoproc.nome from admProc,tipoproc,administradores\n "+
+ "where admProc.id_Processo = tipoproc.id and administradores.id = admProc.id_Adm and  tipoproc.id=?;";
 
     public String salvarTipoProc(TipoProcesso pro) throws SQLException{
     	String salvo = "falha";
@@ -77,10 +76,8 @@ public class TipoProcDao {
     }
     public String salvarRelaciUser(TipoProcesso proc, Administrador adm) throws SQLException {
 
-
         String salvo = "falha";
-
-
+        
         try {
             con.setAutoCommit(false);
             stmt = con.prepareStatement(sqlSalvarRelac);
@@ -119,7 +116,7 @@ public class TipoProcDao {
     	con.setAutoCommit(true);
     }
 
-    public List<TipoProcesso> listarProc() {
+    public List<TipoProcesso> listarTipoProc() {
     	List<TipoProcesso> processos = new ArrayList<TipoProcesso>();
         ResultSet res = null;
 
@@ -134,6 +131,7 @@ public class TipoProcDao {
 				
 				proc.setId(res.getInt("id"));
 				proc.setNome(res.getString("nome"));
+				proc.setDescricao(res.getString("descricao"));
 
                 processos.add(proc);
             }
@@ -142,6 +140,30 @@ public class TipoProcDao {
             System.out.println("Erro na consulta 1:" + e.getMessage());
         }
         return processos;
+    }
+    public List<Administrador> listarAdmsTipo(TipoProcesso tiProc) {
+    	List<Administrador> admList = new ArrayList<>();
+    	 ResultSet res = null;
+
+         try {
+
+             stmt = con.prepareStatement(sqlListarAdmsTipo);
+             stmt.setInt(1, tiProc.getId());
+             res = stmt.executeQuery();
+
+			while (res.next()){
+
+				Administrador adm = new Administrador();
+				
+				adm.setNome(res.getString("nome"));
+
+                admList.add(adm);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Erro na consulta 1:" + e.getMessage());
+        }
+        return admList;
     }
 
 }

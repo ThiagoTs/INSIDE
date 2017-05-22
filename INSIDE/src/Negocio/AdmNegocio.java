@@ -17,10 +17,10 @@ public class AdmNegocio {
 	AdmDao admDao = new AdmDao();
 
     public String salvar(Administrador adm) throws SQLException {
-
+    	
         boolean cpfValido = false;
         boolean emailValido = false;
-        String salvo = "falha";
+        String salvo = "falha!";
         StringBuilder sb = new StringBuilder();
 //        cpfValido = validaCPF(adm.getCpf());
 //        if (!cpfValido) {
@@ -29,6 +29,9 @@ public class AdmNegocio {
         emailValido = isEmailValid(adm.getEmail());
         if (!emailValido) {
             sb.append("email inválido. \n");
+        }
+        if(!chegarUsuario(adm)){
+        	sb.append("Escolha outro nome de usuário!\n");
         }
         if (sb.toString().isEmpty()) {
           salvo = admDao.salvar(adm);
@@ -54,6 +57,9 @@ public class AdmNegocio {
         if (!emailValido) {
             sb.append("email inválido. \n");
         }
+        if(!chegarUsuario(adm)){
+        	sb.append("Digite outro nome de usuário!\n");
+        }
         if (sb.toString().isEmpty()) {
             salvo = admDao.Editar(adm);
         } else {
@@ -68,6 +74,18 @@ public class AdmNegocio {
         List<Administrador> adms = new ArrayList<Administrador>();
         adms = admDao.listarAdms();
         return adms;
+    }
+    public boolean chegarUsuario(Administrador adm){
+    	
+    	List<Administrador> admList = new ArrayList<>();
+    	admList=listarAdms();
+    	for(Administrador adm2: admList){
+    		if(adm.getLogin().equalsIgnoreCase(adm2.getLogin())){
+    			return false;
+    		}
+    	}
+    	return true;
+    	
     }
 
 

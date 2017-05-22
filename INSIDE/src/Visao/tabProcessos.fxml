@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
@@ -13,25 +14,25 @@
 
 <AnchorPane fx:id="aPaneProcesso" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TabProcessosController">
    <children>
-      <TabPane fx:id="tabPaneProcessos" prefHeight="509.0" prefWidth="801.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPaneProcessos" prefHeight="509.0" prefWidth="801.0" stylesheets="@../../../../../Desktop/INSIDE/tabPane.css" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab fx:id="tabAbrirNovoProc" text="ABRIR NOVO PROCESSO">
                <content>
                   <AnchorPane fx:id="aPaneAbrirPro" minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="740.0">
                      <children>
-                        <Separator layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="775.0" />
-                        <Label fx:id="lblPesquiAluno" layoutX="15.0" layoutY="55.0" text="Pesquisar aluno por:">
+                        <Separator layoutX="13.0" layoutY="36.0" prefHeight="25.0" prefWidth="775.0" />
+                        <Label layoutX="36.0" layoutY="58.0" text="Pesquisar aluno por:" textFill="#403e3e">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtPesqAluno" layoutX="324.0" layoutY="55.0" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="2" />
-                        <ComboBox fx:id="comboTipoPesquiAluno" layoutX="176.0" layoutY="55.0" prefHeight="25.0" prefWidth="142.0" promptText="Selecione um item" GridPane.columnIndex="1">
+                        <TextField fx:id="txtPesqAluno" layoutX="324.0" layoutY="56.0" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="2" />
+                        <ComboBox fx:id="comboTipoPesquiAluno" layoutX="159.0" layoutY="55.0" prefHeight="27.0" prefWidth="159.0" promptText="Selecione um item" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;" GridPane.columnIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
-                        <Button fx:id="btnAbrirProc" layoutX="685.0" layoutY="367.0" mnemonicParsing="false" onAction="#abrirNovoProcesso" prefHeight="30.0" prefWidth="81.0" style="-fx-background-color: green;" text="ABRIR" textFill="WHITE">
+                        <Button fx:id="btnAbrirAlunoView" layoutX="685.0" layoutY="306.0" mnemonicParsing="false" onAction="#abrirViewAluno" prefHeight="30.0" prefWidth="81.0" style="-fx-background-color: green;" text="ABRIR" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -39,13 +40,16 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Separator layoutX="14.0" layoutY="441.0" prefHeight="25.0" prefWidth="775.0" />
-                        <ToggleButton fx:id="btnBuscar" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="548.0" layoutY="48.0" mnemonicParsing="false" onAction="#buscarAluno" prefHeight="30.0" prefWidth="38.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                        <Separator layoutX="13.0" layoutY="381.0" prefHeight="25.0" prefWidth="775.0" />
+                        <ToggleButton fx:id="btnBuscar" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="554.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarAluno" prefHeight="26.0" prefWidth="30.0" style="-fx-background-radius: 100;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                            <graphic>
-                              <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -57,85 +61,92 @@
                                  </viewport>
                               </ImageView>
                            </graphic>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
                         </ToggleButton>
-                        <TableView fx:id="tabAlunosPorbusca" layoutX="36.0" layoutY="148.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="205.0" prefWidth="730.0">
+                        <TableView fx:id="tabAlunosPorbusca" layoutX="36.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="147.0" prefWidth="730.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
                            <columns>
-                              <TableColumn fx:id="tblBuscAlun" editable="false" prefWidth="729.0" text="ALUNOS">
-                                 <columns>
-                                    <TableColumn fx:id="colunMatric" editable="false" prefWidth="161.0" text="Matrícula" />
-                                    <TableColumn fx:id="colunNome" editable="false" prefWidth="397.0" text="Nome" />
-                                    <TableColumn fx:id="colunCpf" editable="false" prefWidth="171.0" text="CPF" />
-                                 </columns>
-                              </TableColumn>
+                              <TableColumn fx:id="colunMatric" editable="false" prefWidth="178.0" text="Matrícula" />
+                              <TableColumn fx:id="colunNome" editable="false" prefWidth="380.0" text="Nome" />
+                              <TableColumn fx:id="colunCpf" editable="false" prefWidth="171.0" text="CPF" />
                            </columns>
-                           <effect>
-                              <SepiaTone level="0.35" />
-                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </TableView>
+                        <Button layoutX="36.0" layoutY="118.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="730.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="ALUNOS" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Text fx:id="textProcAberto1" layoutX="342.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR ALUNO" wrappingWidth="118.3310546875">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
             <Tab fx:id="tabProcPendente" text="PROCESSOS PENDENTES">
                <content>
-                  <AnchorPane fx:id="aPaneProcPendente" minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="801.0">
+                  <AnchorPane fx:id="aPaneProcPendente" minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="801.0" style="-fx-background-color: white;">
                      <children>
-                        <Separator layoutX="14.0" layoutY="30.0" prefHeight="13.0" prefWidth="774.0" />
-                        <TableView fx:id="tblProcPendente" layoutX="94.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="613.0">
-                           <columns>
-                              <TableColumn editable="false" prefWidth="407.0" text="PROCESSOS PENDENTES" />
-                              <TableColumn prefWidth="205.0" text="STATUS" />
-                           </columns>
-                           <effect>
-                              <SepiaTone level="0.35" />
-                           </effect>
-                        </TableView>
-                        <Text fx:id="textProcAberto" layoutX="319.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROCESSOS PENDENTES" AnchorPane.leftAnchor="319.0" AnchorPane.topAnchor="3.892578125">
+                        <Text fx:id="textProcAberto" layoutX="319.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROCESSOS PENDENTES" AnchorPane.leftAnchor="319.0" AnchorPane.topAnchor="13.892578125">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Text>
-                        <Button fx:id="btnAbrir" layoutX="636.0" layoutY="403.0" mnemonicParsing="false" onAction="#abrirProcesso" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: green;" text="ABRIR" textFill="WHITE">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Label fx:id="lblBuscarProcesso" layoutX="18.0" layoutY="49.0" text="Buscar processo:">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtBuscarProc" layoutX="115.0" layoutY="45.0" prefHeight="25.0" prefWidth="233.0" promptText="Insira o nome do processo" />
-                        <ToggleButton fx:id="btnBuscarProcPendente" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="352.0" layoutY="38.0" mnemonicParsing="false" onAction="#buscarProcessoPendente" prefHeight="39.0" prefWidth="35.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <graphic>
-                              <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                        <Separator layoutX="14.0" layoutY="44.0" prefHeight="13.0" prefWidth="774.0" />
+                        <Pane fx:id="panePendentes" layoutX="18.0" layoutY="52.0" prefHeight="400.0" prefWidth="801.0">
+                           <children>
+                              <Button layoutX="26.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="729.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="PROCESSOS" textAlignment="CENTER" textFill="#111111">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutY="11.0" text="Buscar processo:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="tblProcPendente" layoutX="26.0" layoutY="89.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="729.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+                                 <columns>
+                                    <TableColumn fx:id="colunPendProtoc" editable="false" prefWidth="136.0" text="Protocolo" />
+                                    <TableColumn fx:id="colunPendNomeProc" editable="false" prefWidth="285.0" text="Nome" />
+                                    <TableColumn fx:id="colunPendNomeAlu" editable="false" prefWidth="307.0" text="Aluno" />
+                                 </columns>
+                              </TableView>
+                              <TextField fx:id="txtBuscarProc" layoutX="97.0" layoutY="7.0" prefHeight="25.0" prefWidth="233.0" promptText="Insira o nome do processo" />
+                              <Button fx:id="btnAbrirProcView" layoutX="684.0" layoutY="345.0" mnemonicParsing="false" onAction="#abrirProcView" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: green;" text="ABRIR" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
-                                 <image>
-                                    <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                           </graphic>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <padding>
-                              <Insets right="2.0" />
-                           </padding>
-                        </ToggleButton>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <ToggleButton fx:id="btnBuscarProcPendente" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="336.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarProcessoPendente" prefHeight="28.0" prefWidth="30.0" style="-fx-background-radius: 100;" stylesheets="@../../../../../Desktop/INSIDE/teste%20-%20Copia.css">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <image>
+                                          <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </ToggleButton>
+                           </children>
+                        </Pane>
                         <Separator layoutX="18.0" layoutY="445.0" prefHeight="13.0" prefWidth="774.0" />
                      </children>
                   </AnchorPane>
@@ -143,7 +154,7 @@
             </Tab>
             <Tab fx:id="tabBuscarProc" text="BUSCAR PROCESSO">
                <content>
-                  <AnchorPane fx:id="aPaneBuscarProc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="aPaneBuscarProc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                      <children>
                         <Text fx:id="textBuscarProcAberto" layoutX="308.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR PROCESSO ABERTO" wrappingWidth="196.4755859375">
                            <font>
@@ -152,24 +163,45 @@
                         </Text>
                         <Separator layoutX="14.0" layoutY="41.0" prefHeight="13.0" prefWidth="774.0" />
                         <TextField fx:id="txtBuscarProcAberto" layoutX="290.0" layoutY="76.0" prefHeight="25.0" prefWidth="233.0" promptText="Insira o nome do processo" />
-                        <ComboBox fx:id="comboTipoPesqui" layoutX="140.0" layoutY="76.0" prefHeight="25.0" prefWidth="142.0" promptText="Selecione um item">
+                        <ComboBox fx:id="comboTipoPesqui" layoutX="126.0" layoutY="76.0" prefHeight="27.0" prefWidth="156.0" promptText="Selecione um item" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
-                        <Label fx:id="lblPesquisarPor" layoutX="14.0" layoutY="76.0" text="Pesquisar por:">
+                        <Label layoutX="14.0" layoutY="76.0" text="Pesquisar por:">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
                         <Separator layoutX="14.0" layoutY="435.0" prefHeight="13.0" prefWidth="774.0" />
-                        <Pane fx:id="paneProcesso" layoutX="21.0" layoutY="153.0" prefHeight="272.0" prefWidth="766.0" />
-                        <ToggleButton fx:id="btnBuscarProcAberto" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="523.0" layoutY="69.0" mnemonicParsing="false" onAction="#buscarProcessoAberto" prefHeight="39.0" prefWidth="35.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                        <Pane fx:id="paneProcesso" layoutX="13.0" layoutY="121.0" prefHeight="337.0" prefWidth="776.0">
+                           <children>
+                              <TableView fx:id="tblProcAbertos" layoutX="10.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="756.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+                                 <columns>
+                                    <TableColumn fx:id="colunProtBusc" editable="false" prefWidth="121.0" text="Protocolo" />
+                                    <TableColumn fx:id="colunBuscNomeProc" prefWidth="158.0" text="Nome do processo" />
+                                    <TableColumn fx:id="colunBuscNomeAlu" prefWidth="287.0" text="Aluno" />
+                                    <TableColumn fx:id="colunBuscStatus" prefWidth="189.0" text="Status" />
+                                 </columns>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TableView>
+                              <Button fx:id="btnCacelBusc" layoutX="700.0" layoutY="230.0" mnemonicParsing="false" onAction="#cancelarBusca" style="-fx-background-color: #c94747;" text="Cancelar" textFill="WHITE">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children></Pane>
+                        <ToggleButton fx:id="btnBuscarProcAberto" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="530.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarProcessoAberto" prefHeight="26.0" prefWidth="26.0" style="-fx-background-radius: 100;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <graphic>
-                              <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

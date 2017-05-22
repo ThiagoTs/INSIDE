@@ -14,7 +14,7 @@ import Modelo.TipoProcesso;
 import daoUtil.ConnectionFactory;
 
 public class DocumentosDao {
-	
+
 	ConnectionFactory connection = null;
 	private Connection con;
 	private Statement stm;
@@ -24,16 +24,18 @@ public class DocumentosDao {
 		ConnectionFactory cf = new ConnectionFactory();
 		con = cf.getConnection();
 	}
-	
+
 	String sqlSalvar = "INSERT INTO processos_internos.documentos" +
 			"(nome)" +
 			"VALUES(?)" ;
 
 	String sqlSalvarRelacDoc = "insert into procDoc" +
-            "(id_Documento, id_Processo)" +
-            "values(?,?);";
+			"(id_Documento, id_Processo)" +
+			"values(?,?);";
 
-	
+	String sqlListarDocTipo = "select documentos.nome,tipoproc.nome as nomeTipo from procDoc,tipoproc,documentos\n"+
+			" where documentos.id = procDoc.id_Documento and tipoproc.id= procDoc.id_Processo and procDoc.id_Processo=?;";
+
 	public String salvar(Documentos doc) throws SQLException {
 
 
@@ -44,7 +46,7 @@ public class DocumentosDao {
 			con.setAutoCommit(false);
 			stmt = con.prepareStatement(sqlSalvar);
 			stmt.setString(1, doc.getNome());
-			
+
 
 			stmt.executeUpdate();
 
@@ -82,7 +84,7 @@ public class DocumentosDao {
 			stmt = con.prepareStatement(sqlSalvarRelacDoc);
 			stmt.setInt(1, doc.getId());
 			stmt.setInt(2, tiProc.getId());
-			
+
 
 			stmt.executeUpdate();
 
@@ -103,7 +105,7 @@ public class DocumentosDao {
 			if (stmt != null) {
 				stmt.close();
 			}
-			
+
 		}
 
 		return salvo;
@@ -164,19 +166,45 @@ public class DocumentosDao {
 			while (res.next()){
 
 				Documentos doc = new Documentos();
-				
-				
+
+
 				doc.setId(res.getInt("id"));
 				doc.setNome(res.getString("nome"));
-				
+
 
 				list.add(doc);
 			}
 		}
 		catch (SQLException e){
-			System.out.println("Erro na consulta1:" + e.getMessage());
+			System.out.println("Erro na consulta2:" + e.getMessage());
 		}
 		return list;
 	}
+	public List<Documentos> listarAdmsTipo(TipoProcesso tiProc) {
+		List<Documentos> docList = new ArrayList<>();
+		ResultSet res = null;
+
+		try {
+
+			stmt = con.prepareStatement(sqlListarDocTipo);
+			stmt.setInt(1, tiProc.getId());
+			res = stmt.executeQuery();
+
+			while (res.next()){
+
+				Documentos doc = new Documentos();
+
+				doc.setNome(res.getString("nome"));
+
+				docList.add(doc);
+			}
+		}
+		catch (SQLException e){
+			System.out.println("Erro na consulta 2:" + e.getMessage());
+		}
+		return docList;
+	}
+
+
 
 }

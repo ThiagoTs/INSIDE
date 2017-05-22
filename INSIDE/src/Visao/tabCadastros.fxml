@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="aPaneCadastro" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TabCadastrosController">
    <children>
-      <TabPane fx:id="tabPaneCad" layoutY="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="467.0" prefWidth="604.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="tabPaneCad" layoutY="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="467.0" prefWidth="604.0" stylesheets="@../../../../../Desktop/INSIDE/tabPane.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab fx:id="tabTipoProc" text="TIPO DE PROCESSO">
                <content>
@@ -21,7 +21,7 @@
                      <children>
                         <HBox fx:id="hbDocumento" alignment="CENTER" layoutX="86.0" layoutY="147.0" prefHeight="37.0" prefWidth="254.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <ComboBox fx:id="comboDocumentos" prefHeight="25.0" prefWidth="184.0" promptText="Selecione o documento" style="-fx-background-color: white; -fx-border-color: lightgray;">
+                              <ComboBox fx:id="comboDocumentos" prefHeight="25.0" prefWidth="184.0" promptText="Selecione o documento" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -29,9 +29,9 @@
                                     <Insets right="3.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <ToggleButton fx:id="btnAddDocTab" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addDocumentoTabela" prefHeight="40.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
+                              <ToggleButton fx:id="btnAddDocTab" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addDocumentoTabela" prefHeight="32.0" prefWidth="33.0" style="-fx-background-radius: 100; -fx-border-radius: 100;">
                                  <graphic>
-                                    <ImageView fitHeight="36.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -41,6 +41,9 @@
                                        <viewport>
                                           <Rectangle2D />
                                        </viewport>
+                                       <rotationAxis>
+                                          <Point3D />
+                                       </rotationAxis>
                                     </ImageView>
                                  </graphic>
                                  <opaqueInsets>
@@ -52,28 +55,31 @@
                               </ToggleButton>
                            </children>
                         </HBox>
-                        <Label fx:id="lblDescricao" layoutX="403.0" layoutY="99.0" text="Descrição:" GridPane.columnIndex="2">
+                        <Label layoutX="403.0" layoutY="99.0" text="Descrição:" GridPane.columnIndex="2">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Button fx:id="btnExcluirFluxo" layoutX="722.0" layoutY="394.0" mnemonicParsing="false" onAction="#excluirFluxo" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                        <Button fx:id="btnExcluirFluxo" layoutX="722.0" layoutY="394.0" mnemonicParsing="false" onAction="#excluirFluxo" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: #c94747;" text="Excluir" textFill="#fcf9f9">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                         </Button>
-                        <Label fx:id="lblNomeProc" layoutX="15.0" layoutY="99.0" text="Nome:" />
-                        <Label fx:id="lblBuscaResponsavel" layoutX="403.0" layoutY="159.0" text="Buscar responsável:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label layoutX="15.0" layoutY="99.0" text="Nome:" />
+                        <Label layoutX="403.0" layoutY="159.0" text="Buscar responsável:" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
                         <HBox fx:id="hbBuscaResp" alignment="CENTER" layoutX="510.0" layoutY="148.0" prefHeight="39.0" prefWidth="282.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <children>
-                              <ComboBox fx:id="comboUser" prefHeight="25.0" prefWidth="234.0" promptText="Selecione um usuário" style="-fx-background-color: white; -fx-border-color: lightgray;">
+                              <ComboBox fx:id="comboUser" prefHeight="25.0" prefWidth="234.0" promptText="Selecione um usuário" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -102,7 +108,7 @@
                            </children>
                         </HBox>
                         <TextField fx:id="txtNomeProc" layoutX="88.0" layoutY="95.0" prefHeight="25.0" prefWidth="225.0" GridPane.columnIndex="1" />
-                        <Label fx:id="lblDocumento" layoutX="16.0" layoutY="159.0" text="Documentos:" GridPane.rowIndex="1" />
+                        <Label layoutX="16.0" layoutY="159.0" text="Documentos:" GridPane.rowIndex="1" />
                         <Separator layoutX="11.0" layoutY="77.0" prefHeight="13.0" prefWidth="784.0" />
                         <Text fx:id="textCadTipoProc" layoutX="276.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR TIPO DE PROCESSO">
                            <font>
@@ -111,18 +117,18 @@
                         </Text>
                         <Separator layoutX="9.0" layoutY="419.0" prefHeight="13.0" prefWidth="777.0" />
                         <TextArea fx:id="txtDescricao" layoutX="467.0" layoutY="93.0" prefHeight="56.0" prefWidth="313.0" />
-                        <Label fx:id="txtBuscaProc" layoutX="16.0" layoutY="56.0" text="Buscar processo:">
+                        <Label layoutX="16.0" layoutY="56.0" text="Buscar processo:">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboTiposProc" layoutX="114.0" layoutY="52.0" prefHeight="25.0" prefWidth="242.0" promptText="Selecione um tipo de processo" style="-fx-background-color: white; -fx-border-color: lightgray;">
+                        <ComboBox fx:id="comboTiposProc" layoutX="114.0" layoutY="52.0" prefHeight="25.0" prefWidth="242.0" promptText="Selecione um tipo de processo" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
                         <Separator layoutX="222.0" layoutY="33.0" prefHeight="12.0" prefWidth="322.0" />
-                        <TableView fx:id="tblCadDoc" layoutX="33.0" layoutY="191.0" prefHeight="200.0" prefWidth="323.0" style="-fx-border-color: black;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+                        <TableView fx:id="tblCadDoc" layoutX="33.0" layoutY="191.0" prefHeight="200.0" prefWidth="323.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
                            <columns>
                               <TableColumn fx:id="colunCadDoc" editable="false" prefWidth="321.0" sortable="false" text="Documentos" />
                            </columns>
@@ -130,7 +136,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </TableView>
-                        <TableView fx:id="tblCadFluxo" layoutX="431.0" layoutY="191.0" prefHeight="200.0" prefWidth="351.0" style="-fx-border-color: black;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+                        <TableView fx:id="tblCadFluxo" layoutX="431.0" layoutY="191.0" prefHeight="200.0" prefWidth="351.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
                            <columns>
                               <TableColumn fx:id="colunCadFluxo" editable="false" prefWidth="349.0" sortable="false" text="Fluxo do processo" />
                            </columns>
@@ -138,13 +144,16 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </TableView>
-                        <Button fx:id="btnExcluirDoc" layoutX="33.0" layoutY="394.0" mnemonicParsing="false" onAction="#excluirDocumentosListProc" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                        <Button fx:id="btnExcluirDoc" layoutX="33.0" layoutY="394.0" mnemonicParsing="false" onAction="#excluirDocumentosListProc" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: #c94747;" text="Excluir" textFill="#fcf9f9">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                         </Button>
                         <Button fx:id="btnSalvarProc" layoutX="367.0" layoutY="432.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarProcesso" prefHeight="28.0" prefWidth="76.0" style="-fx-background-color: green;" text="SALVAR" textFill="WHITE">
                            <cursor>
@@ -154,6 +163,27 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
+                        <ToggleButton fx:id="btnBuscTipo" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="367.0" layoutY="52.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarTipoProc" prefHeight="25.0" prefWidth="29.0" style="-fx-background-radius: 100; -fx-border-radius: 100;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <image>
+                                    <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                           </graphic>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ToggleButton>
                      </children>
                   </AnchorPane>
                </content>
@@ -162,7 +192,7 @@
                <content>
                   <AnchorPane fx:id="aPaneUser" minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="603.0" style="-fx-background-color: white;">
                      <children>
-                        <ComboBox fx:id="comboBuscaUser" layoutX="141.0" layoutY="47.0" prefHeight="25.0" prefWidth="307.0" promptText="Selecione um usuário" style="-fx-background-color: white; -fx-border-color: lightgray;">
+                        <ComboBox fx:id="comboBuscaUser" layoutX="141.0" layoutY="47.0" prefHeight="25.0" prefWidth="307.0" promptText="Selecione um usuário" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
@@ -210,85 +240,83 @@
                            </GridPane.margin>
                         </HBox>
                         <TextField fx:id="txtEmail" layoutX="116.0" layoutY="201.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="comboDepart" layoutX="543.0" layoutY="201.0" prefHeight="25.0" prefWidth="205.0" promptText="Selecione o departamento" style="-fx-background-color: white; -fx-border-color: lightgray;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                        <ComboBox fx:id="comboDepart" layoutX="543.0" layoutY="201.0" prefHeight="25.0" prefWidth="205.0" promptText="Selecione o departamento" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
-                        <ComboBox fx:id="comboCargo" layoutX="116.0" layoutY="231.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o cargo" style="-fx-background-color: white; -fx-border-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <ComboBox fx:id="comboCargo" layoutX="116.0" layoutY="231.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o cargo" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
-                        <ComboBox fx:id="comboTipoUser" layoutX="543.0" layoutY="237.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o tipo" style="-fx-background-color: white; -fx-border-color: lightgray;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <ComboBox fx:id="comboTipoUser" layoutX="543.0" layoutY="237.0" prefHeight="25.0" prefWidth="196.0" promptText="Selecione o tipo" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ComboBox>
-                        <HBox fx:id="hbCrud" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="295.0" prefHeight="53.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <HBox fx:id="hbCrud" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="295.0" prefHeight="53.0" prefWidth="218.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <children>
-                              <Button fx:id="btnExcluirUser" disable="true" mnemonicParsing="false" onAction="#excluirUsuario" prefHeight="25.0" prefWidth="58.0" text="Excluir">
+                              <Button fx:id="btnAlterarUser" cancelButton="true" mnemonicParsing="false" onAction="#editarUsuario" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: orange;" text="Alterar" textFill="#fcfafa">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
+                                 <font>
+                              		<Font name="System Bold" size="12.0" />
+                         		 </font>
                               </Button>
-                              <Button fx:id="btnAlterarUser" cancelButton="true" mnemonicParsing="false" onAction="#editarUsuario" prefHeight="25.0" prefWidth="60.0" text="Alterar">
+                              <Button fx:id="btnSalvarUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarUsuario" prefHeight="25.0" prefWidth="67.0" style="-fx-background-color: green;" text="Salvar" textFill="#f8f6f6">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
-                                 <HBox.margin>
-                                    <Insets right="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnSalvarUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarUsuario" prefHeight="25.0" prefWidth="60.0" text="Salvar">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
+                                 <font>
+                              		<Font name="System Bold" size="12.0" />
+                           		</font>
                               </Button>
                            </children>
                         </HBox>
-                        <Label fx:id="lblNome" layoutX="23.0" layoutY="114.0" text="Nome:  *" />
-                        <Label fx:id="lblCpf" layoutX="437.0" layoutY="138.0" text="CPF: *" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label layoutX="23.0" layoutY="114.0" text="Nome:  *" />
+                        <Label layoutX="437.0" layoutY="138.0" text="CPF: *" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="8.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblCargo" layoutX="23.0" layoutY="238.0" text="Cargo: *" GridPane.rowIndex="3" />
-                        <Label fx:id="lblSexo" layoutX="437.0" layoutY="170.0" text="Sexo:  *" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label layoutX="23.0" layoutY="238.0" text="Cargo: *" GridPane.rowIndex="3" />
+                        <Label layoutX="437.0" layoutY="170.0" text="Sexo:  *" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="8.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblMatricula" layoutX="437.0" layoutY="107.0" text="Matrícula: *" GridPane.columnIndex="2">
+                        <Label layoutX="437.0" layoutY="107.0" text="Matrícula: *" GridPane.columnIndex="2">
                            <GridPane.margin>
                               <Insets left="8.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblTipoUser" layoutX="435.0" layoutY="240.0" text="Tipo de usuário: *" GridPane.rowIndex="4" />
-                        <Label fx:id="lblDepart" layoutX="437.0" layoutY="200.0" text="Departamento:  *" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <Label layoutX="435.0" layoutY="240.0" text="Tipo de usuário: *" GridPane.rowIndex="4" />
+                        <Label layoutX="437.0" layoutY="200.0" text="Departamento:  *" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="8.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblTelefone" layoutX="23.0" layoutY="176.0" text="Telefone:" GridPane.rowIndex="1" />
-                        <Label fx:id="lblEmail" layoutX="23.0" layoutY="208.0" text="E-mail: *" GridPane.rowIndex="2" />
-                        <Text fx:id="textCadUser" layoutX="253.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO DE USUÁRIOS" textAlignment="CENTER" wrappingWidth="244.52294921875">
+                        <Label layoutX="23.0" layoutY="176.0" text="Telefone:" GridPane.rowIndex="1" />
+                        <Label layoutX="23.0" layoutY="208.0" text="E-mail: *" GridPane.rowIndex="2" />
+                        <Text layoutX="253.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO DE USUÁRIOS" textAlignment="CENTER" wrappingWidth="244.52294921875">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
                         <Separator layoutX="14.0" layoutY="80.0" prefHeight="12.0" prefWidth="774.0" />
                         <Separator layoutX="14.0" layoutY="382.0" prefHeight="12.0" prefWidth="780.0" />
-                        <Label fx:id="lblBuscaUser" layoutX="23.0" layoutY="47.0" text="Buscar usuário:">
+                        <Label layoutX="23.0" layoutY="47.0" text="Buscar usuário:">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
                         <Separator layoutX="214.0" layoutY="28.0" prefHeight="12.0" prefWidth="322.0" />
-                        <Label fx:id="lblLogin" layoutX="23.0" layoutY="142.0" text="Usuário:  *" />
+                        <Label layoutX="23.0" layoutY="142.0" text="Usuário:  *" />
                      </children>
                   </AnchorPane>
                </content>
@@ -304,14 +332,17 @@
                         </Text>
                         <Separator layoutX="14.0" layoutY="52.0" prefHeight="12.0" prefWidth="774.0" />
                         <Separator layoutX="14.0" layoutY="440.0" prefHeight="12.0" prefWidth="774.0" />
-                        <Label fx:id="lblNomeDoc" layoutX="140.0" layoutY="116.0" text="Nome:" />
+                        <Label layoutX="140.0" layoutY="116.0" text="Nome:" />
                         <TextField fx:id="txtNomeDoc" layoutX="194.0" layoutY="112.0" prefHeight="25.0" prefWidth="333.0" />
                         <HBox fx:id="hbCrudDoc" alignment="CENTER_RIGHT" layoutX="361.0" layoutY="369.0" prefHeight="53.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btnSalvarDoc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarDocumentoList" prefHeight="25.0" prefWidth="60.0" text="Salvar">
+                              <Button fx:id="btnSalvarDoc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#salvarDocumentoList" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: green;" text="Salvar" textFill="WHITE">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
+                                 <font>
+                              		<Font name="System Bold" size="12.0" />
+                           		</font>
                               </Button>
                            </children>
                         </HBox>
@@ -332,8 +363,11 @@
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
-                        <TableView fx:id="tblDocs" layoutX="191.0" layoutY="169.0" prefHeight="200.0" prefWidth="367.0" style="-fx-border-color: black;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+                        <TableView fx:id="tblDocs" layoutX="191.0" layoutY="169.0" prefHeight="200.0" prefWidth="367.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
                           <columns>
                             <TableColumn fx:id="colunDocs" editable="false" prefWidth="365.0" sortable="false" text="Lista de documentos" />
                           </columns>

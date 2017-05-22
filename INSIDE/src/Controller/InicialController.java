@@ -34,7 +34,7 @@ public class InicialController implements Initializable{
 		
 		chamarLogon();
 	}
-	public void chamarLogon(){
+	public  void chamarLogon(){
 		 URL arquivoFXML;
 	        arquivoFXML = getClass().getResource("/Visao/telaLogon.fxml");
 	        Parent fxmlParent = null;

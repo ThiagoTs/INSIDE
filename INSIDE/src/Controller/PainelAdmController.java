@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Modelo.Administrador;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.TabPane;
@@ -62,7 +61,7 @@ public class PainelAdmController implements Initializable{
 	private TextArea textUser;
 
 	static Administrador adm = new Administrador();
-	
+	InicialController iniCon = new InicialController();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -83,7 +82,20 @@ public class PainelAdmController implements Initializable{
 	
 	@FXML
 	public void deslogar(ActionEvent event) throws IOException {
-
+			adm = new Administrador();
+			
+			paneInicialAdm.getChildren().clear();
+			 URL arquivoFXML;
+		        arquivoFXML = getClass().getResource("/Visao/telaLogon.fxml");
+		        Parent fxmlParent = null;
+				try {
+					fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				paneInicialAdm.getChildren().clear();
+				paneInicialAdm.getChildren().add(fxmlParent);
 	}
 	public void preencherMenus(){
 		try {

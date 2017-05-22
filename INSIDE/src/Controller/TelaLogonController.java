@@ -77,7 +77,7 @@ public class TelaLogonController implements Initializable{
 	Administrador adm = new Administrador();
 	AdmNegocio admNegocio = new AdmNegocio();
 	PainelAdmController painelAdm = new PainelAdmController();
-	List<Administrador> listAdm = new ArrayList();
+	List<Administrador> listAdm ;
 	Main main = null;
 
 	@FXML
@@ -133,19 +133,6 @@ public class TelaLogonController implements Initializable{
 	@FXML
 	public void help(ActionEvent event) {
 
-	}
-	public void chamarLogon(){
-		URL arquivoFXML;
-		arquivoFXML = getClass().getResource("/Visao/telaLogon.fxml");
-		Parent fxmlParent = null;
-		try {
-			fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		panePrincipal.getChildren().clear();
-		panePrincipal.getChildren().add(fxmlParent);
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -15,9 +15,11 @@ public class TipoProcesso {
 	private SimpleStringProperty descricao = new SimpleStringProperty();
 
 	
-	private List<Documentos>documentos = new ArrayList<Documentos>();
-	private List<Responsavel> fluxo = new ArrayList<Responsavel>();
+	private List<Documentos>documentos;
+	private List<Responsavel> fluxo ;
 	
+
+	private List<Administrador> fluxoAdm ;
 	
 	public TipoProcesso(SimpleIntegerProperty id, SimpleStringProperty nome, SimpleStringProperty descricao) {
 		super();
@@ -78,6 +80,13 @@ public class TipoProcesso {
 
 	public void setFluxo(List<Responsavel> fluxo) {
 		this.fluxo = fluxo;
+	}
+	public List<Administrador> getFluxoAdm() {
+		return fluxoAdm;
+	}
+
+	public void setFluxoAdm(List<Administrador> fluxoAdm) {
+		this.fluxoAdm = fluxoAdm;
 	}
 
 	

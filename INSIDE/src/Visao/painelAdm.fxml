@@ -34,7 +34,7 @@
          <center>
             <TabPane fx:id="tblviewPrincipal" prefHeight="540.0" prefWidth="801.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab fx:id="tabProcessos" style="-fx-pref-width: 300; -fx-font-size: 18; -fx-font-family: arial black; -fx-pref-height: 35;" text="PROCESSOS">
+                <Tab fx:id="tabProcessos" style="-fx-pref-width: 300; -fx-font-size: 18; -fx-font-family: arial black; -fx-pref-height: 35;" text="PROCESSOS" stylesheets="@../../../../../Desktop/INSIDE/tabPane.css">
                      <content>
                         <AnchorPane fx:id="aPaneProcessos" prefHeight="509.0" prefWidth="801.0" />
                      </content></Tab>
