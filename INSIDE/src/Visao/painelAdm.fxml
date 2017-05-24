@@ -13,7 +13,7 @@
 
 <Pane fx:id="paneInicialAdm" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PainelAdmController">
    <children>
-      <BorderPane fx:id="bPanePainel" opacity="0.68" prefHeight="585.0" prefWidth="1000.0">
+      <BorderPane fx:id="bPanePainel"  opacity="0.68" prefHeight="585.0" prefWidth="1000.0">
          <right>
             <GridPane fx:id="gridStatusProc" prefHeight="540.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columnConstraints>
@@ -32,15 +32,18 @@
             </GridPane>
          </right>
          <center>
-            <TabPane fx:id="tblviewPrincipal" prefHeight="540.0" prefWidth="801.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane fx:id="tblviewPrincipal" prefHeight="540.0" prefWidth="801.0" stylesheets="@../../../../../Desktop/INSIDE/tabPane2.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab fx:id="tabProcessos" style="-fx-pref-width: 300; -fx-font-size: 18; -fx-font-family: arial black; -fx-pref-height: 35;" text="PROCESSOS" stylesheets="@../../../../../Desktop/INSIDE/tabPane.css">
+                <Tab fx:id="tabProcessos" style="-fx-font-size: 18; -fx-font-family: arial black;" text="PROCESSOS">
                      <content>
                         <AnchorPane fx:id="aPaneProcessos" prefHeight="509.0" prefWidth="801.0" />
                      </content></Tab>
-                <Tab fx:id="tabCadastros" style="-fx-font-family: arial black; -fx-font-size: 18; -fx-pref-width: 300; -fx-pref-height: 35;" text="CADASTROS">
+                <Tab fx:id="tabCadastros" style="-fx-font-family: arial black; -fx-font-size: 18;" text="CADASTROS">
                      <content>
-                        <AnchorPane fx:id="aPaneCadastros" prefHeight="509.0" prefWidth="801.0" />
+                        <AnchorPane fx:id="aPaneCadastros" prefHeight="509.0" prefWidth="801.0">
+                           <children>
+                              <Label layoutX="120.0" layoutY="119.0" text="Label" textFill="#a4b2c1" />
+                           </children></AnchorPane>
                      </content></Tab>
               </tabs>
             </TabPane>

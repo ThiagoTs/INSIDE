@@ -209,7 +209,7 @@ public class TabCadastrosController implements Initializable {
 		preencherComboTiProc();
 
 	}
-
+	//TODO
 	//----------------------Cadastrar Usuário---------------------------------//
 
 	private void pegaValores(Administrador adm) {
@@ -465,7 +465,7 @@ public class TabCadastrosController implements Initializable {
 		comboCargo.getItems().addAll(listaCargos);
 	}
 
-
+	//TODO
 	//--------------------------------------Cadastrar documentos-------------------------------------------//
 
 
@@ -560,7 +560,7 @@ public class TabCadastrosController implements Initializable {
 		tblDocs.getItems().removeAll();
 		tblDocs.setItems(docView);
 	}
-
+	//TODO 
 	//------------------------------Cadastrar Tipo de processo--------------------------------//
 
 	@FXML

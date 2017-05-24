@@ -26,11 +26,16 @@ import Negocio.AdmNegocio;
 import application.Main;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
-
+import javafx.event.Event;
+import javafx.event.EventDispatcher;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.ImageView;
-
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.PasswordField;
 
 import javafx.scene.shape.Rectangle;
@@ -78,6 +83,7 @@ public class TelaLogonController implements Initializable{
 	AdmNegocio admNegocio = new AdmNegocio();
 	PainelAdmController painelAdm = new PainelAdmController();
 	List<Administrador> listAdm ;
+
 	Main main = null;
 
 	@FXML
@@ -96,38 +102,89 @@ public class TelaLogonController implements Initializable{
 	@FXML
 	public void entrar(ActionEvent event) throws Exception{
 		adm = new Administrador();
-		StringBuilder sb = new StringBuilder();
-		sb.append("");
 		String msg = txtUsuario.getText();
 		String msg2 = txtSenha.getText();
-		adm.setLogin(msg);
-		adm = buscaUser();
+		if(validaCampos()){
+			buscaUser(msg);
+			if(adm.getId()!=0){
+				if(adm.getSenha().equals(msg2)){	
+					painelAdm.pegaAdm(adm);	
+					URL arquivoFXML;
+					arquivoFXML = getClass().getResource("/Visao/painelAdm.fxml");
+					Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
+					panePrincipal.getChildren().clear();
+					panePrincipal.getChildren().add(fxmlParent);
 
-		if((adm.getLogin().equals(msg))&&(adm.getSenha().equals(msg2))){	
-			painelAdm.pegaAdm(adm);	
-			URL arquivoFXML;
-			arquivoFXML = getClass().getResource("/Visao/painelAdm.fxml");
-			Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
-			panePrincipal.getChildren().clear();
-			panePrincipal.getChildren().add(fxmlParent);
-
-		}else{
-			msg = "Usuário ou senha incorretos!";
-			exibeMensagem(msg);
+				}else{
+					msg = "Usuário ou senha incorretos!";
+					exibeMensagem(msg);
+				}
+			}else{
+				msg = "Usuário ou senha incorretos!";
+				exibeMensagem(msg);
+			}
 		}
 
 	}
 
-	private Administrador buscaUser() {
-
+	private void buscaUser(String msg) {
 		listAdm = admNegocio.listarAdms();
-		listAdm.forEach( adm2 -> {
-			if(adm2.getLogin().equals(adm.getLogin())){
-				this.adm = adm2;
+		for(Administrador adm2:listAdm){
+			if(adm2.getLogin().equalsIgnoreCase(msg)){
+				this.adm = adm2;	
 			}
 		}
-				);
-		return adm;
+	}
+	public boolean validaCampos(){
+		String msg = txtUsuario.getText();
+		String msg2 = txtSenha.getText();
+		List<Control>  controls = new ArrayList<>();
+		StringBuilder sb = new StringBuilder();
+		sb.append("");
+		if(msg.equals("")||msg==null){
+			sb.append("Digite o Usuário!\n");
+			controls.add(txtUsuario);
+		}
+		if(msg2.equals("")||msg2==null){
+			sb.append("Digite a senha!\n");
+			controls.add(txtSenha);
+
+		}
+		if(!sb.equals("")||sb!=null){
+			exibeMensagem(sb.toString());
+			animaCamposValidados(controls);
+		}
+		return sb.toString().isEmpty();
+	}
+	
+	
+	@FXML
+	public void enter(KeyEvent event) throws Exception {
+		adm = new Administrador();
+		String msg = txtUsuario.getText();
+		String msg2 = txtSenha.getText();
+		if(validaCampos()){
+			buscaUser(msg);
+			if(adm.getId()!=0){
+				if(adm.getSenha().equals(msg2)){	
+					painelAdm.pegaAdm(adm);	
+					URL arquivoFXML;
+					arquivoFXML = getClass().getResource("/Visao/painelAdm.fxml");
+					Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
+					panePrincipal.getChildren().clear();
+					panePrincipal.getChildren().add(fxmlParent);
+
+				}else{
+					msg = "Usuário ou senha incorretos!";
+					exibeMensagem(msg);
+				}
+			}else{
+				msg = "Usuário ou senha incorretos!";
+				exibeMensagem(msg);
+			}
+		}
+		
+			
 	}
 
 	@FXML
@@ -138,6 +195,19 @@ public class TelaLogonController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 
 
+		txtSenha.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                	try {
+						enter(event);
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+					} 
+                }
+            }
+        });
 	}
 	public void animaCamposValidados(List<Control> controls) {
 		controls.forEach(control -> {

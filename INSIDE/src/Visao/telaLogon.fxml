@@ -11,7 +11,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane fx:id="panePrincipal" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaLogonController">
    <children>
       <BorderPane fx:id="bPanePrincipal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" opacity="0.68" prefHeight="555.0" prefWidth="1000.0">
@@ -33,7 +32,7 @@
                   <Label fx:id="lblUsuario" text="Usuário:" GridPane.rowIndex="2" />
                   <Label fx:id="lblSenha" text="Senha:" GridPane.rowIndex="3" />
                   <TextField fx:id="txtUsuario" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <PasswordField fx:id="txtSenha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <PasswordField fx:id="txtSenha" onKeyPressed="#enter" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Hyperlink fx:id="linkEsqueciSenha" alignment="CENTER_RIGHT" contentDisplay="CENTER" onAction="#esqueciSenha" prefHeight="23.0" prefWidth="133.0" text="Esqueci minha senha!" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="60.0" />

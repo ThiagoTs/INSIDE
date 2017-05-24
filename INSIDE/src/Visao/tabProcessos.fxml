@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
@@ -18,7 +19,7 @@
          <tabs>
             <Tab fx:id="tabAbrirNovoProc" text="ABRIR NOVO PROCESSO">
                <content>
-                  <AnchorPane fx:id="aPaneAbrirPro" minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="740.0">
+                  <AnchorPane fx:id="aPaneAbrirPro" minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="740.0" style="-fx-background-color: white;">
                      <children>
                         <Separator layoutX="13.0" layoutY="36.0" prefHeight="25.0" prefWidth="775.0" />
                         <Label layoutX="36.0" layoutY="58.0" text="Pesquisar aluno por:" textFill="#403e3e">
@@ -62,17 +63,17 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <TableView fx:id="tabAlunosPorbusca" layoutX="36.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="147.0" prefWidth="730.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+                        <TableView fx:id="tabAlunosPorbusca" layoutX="36.0" layoutY="182.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="116.0" prefWidth="730.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableViewAlu.css">
                            <columns>
-                              <TableColumn fx:id="colunMatric" editable="false" prefWidth="178.0" text="Matrícula" />
-                              <TableColumn fx:id="colunNome" editable="false" prefWidth="380.0" text="Nome" />
-                              <TableColumn fx:id="colunCpf" editable="false" prefWidth="171.0" text="CPF" />
+                              <TableColumn fx:id="colunMatric" editable="false" prefWidth="178.0" style="-fx-alignment: Center;" text="Matrícula" />
+                              <TableColumn fx:id="colunNome" editable="false" prefWidth="380.0" style="-fx-alignment: Center;" text="Nome" />
+                              <TableColumn fx:id="colunCpf" editable="false" prefWidth="171.0" style="-fx-alignment: Center;" text="CPF" />
                            </columns>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </TableView>
-                        <Button layoutX="36.0" layoutY="118.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="730.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="ALUNOS" textAlignment="CENTER" textFill="WHITE">
+                        <Button layoutX="36.0" layoutY="150.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="730.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="ALUNO" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
