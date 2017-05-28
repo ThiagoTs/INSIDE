@@ -87,7 +87,7 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private HBox hbDocumento;
 	@FXML
-	private ComboBox comboDocumentos;
+	private ComboBox<String> comboDocumentos;
 	@FXML
 	private ToggleButton btnAddDocTab;
 	@FXML
@@ -95,7 +95,7 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private HBox hbBuscaResp;
 	@FXML
-	private ComboBox comboUser;
+	private ComboBox<String> comboUser;
 	@FXML
 	private ToggleButton btnAddResp;
 	@FXML
@@ -105,7 +105,7 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private TextArea txtDescricao;
 	@FXML
-	private ComboBox comboTiposProc;
+	private ComboBox<String> comboTiposProc;
 	@FXML
 	private TableView<Documentos> tblCadDoc;
 	@FXML
@@ -149,11 +149,11 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private TextField txtEmail;
 	@FXML
-	private ComboBox comboDepart;
+	private ComboBox<String> comboDepart;
 	@FXML
-	private ComboBox comboCargo;
+	private ComboBox<String> comboCargo;
 	@FXML
-	private ComboBox comboTipoUser;
+	private ComboBox<String> comboTipoUser;
 	@FXML
 	private HBox hbCrud;
 	@FXML
@@ -173,9 +173,9 @@ public class TabCadastrosController implements Initializable {
 	@FXML
 	private ToggleButton btnAddDoc;
 	@FXML
-	private TableView tblDocs;
+	private TableView<Documentos> tblDocs;
 	@FXML
-	private TableColumn colunDocs;
+	private TableColumn<Documentos,String> colunDocs;
 
 	List<Administrador> listAdm =  new ArrayList<>();
 	List<Administrador> listAdm2 =  new ArrayList<>();

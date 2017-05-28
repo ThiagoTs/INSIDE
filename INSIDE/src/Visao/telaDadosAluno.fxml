@@ -14,14 +14,14 @@
    <children>
       <Pane fx:id="paneDadosAluno" prefHeight="473.0" prefWidth="789.0">
          <children>
-            <Label fx:id="lblEmail" layoutX="24.0" layoutY="113.0" text="E-mail:" />
-            <Label fx:id="lblNome" layoutX="24.0" layoutY="51.0" text="Nome:" />
+            <Label layoutX="24.0" layoutY="113.0" text="E-mail:" />
+            <Label layoutX="24.0" layoutY="51.0" text="Nome:" />
             <TextField fx:id="txtResponsavel" editable="false" layoutX="478.0" layoutY="160.0" prefHeight="25.0" prefWidth="279.0" />
-            <Label fx:id="lblTelefone" layoutX="24.0" layoutY="84.0" text="Telefone:" />
-            <Label fx:id="lblMatricula" layoutX="383.0" layoutY="51.0" text="Matrícula:" />
+            <Label layoutX="24.0" layoutY="84.0" text="Telefone:" />
+            <Label layoutX="383.0" layoutY="51.0" text="Matrícula:" />
             <TextField fx:id="txtEndereco" editable="false" layoutX="85.0" layoutY="164.0" prefHeight="25.0" prefWidth="271.0" />
             <TextField fx:id="txtCpf" editable="false" layoutX="478.0" layoutY="72.0" />
-            <Label fx:id="lblDataNasc" layoutX="383.0" layoutY="138.0" text="Data nascimento:" />
+            <Label layoutX="383.0" layoutY="138.0" text="Data nascimento:" />
             <HBox fx:id="hbCrud" alignment="CENTER" layoutX="588.0" layoutY="189.0" prefHeight="45.0" prefWidth="162.0">
                <children>
                   <Button fx:id="btnAlterar" cancelButton="true" mnemonicParsing="false" onAction="#editarProcesso" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: orange;" text="Alterar" textFill="#fcf9f9">
@@ -45,12 +45,12 @@
                   </Button>
                </children>
             </HBox>
-            <Label fx:id="lblEnderco" layoutX="24.0" layoutY="172.0" text="Endereço:" />
+            <Label layoutX="24.0" layoutY="172.0" text="Endereço:" />
             <TextField fx:id="txtCurso" editable="false" layoutX="85.0" layoutY="134.0" />
-            <DatePicker fx:id="dateDataNasc" disable="true" editable="false" layoutX="478.0" layoutY="130.0" />
-            <Label fx:id="lblCpf" layoutX="383.0" layoutY="80.0" text="CPF:" />
+            <DatePicker fx:id="dateDataNasc" layoutX="478.0" layoutY="130.0" />
+            <Label layoutX="383.0" layoutY="80.0" text="CPF:" />
             <TextField fx:id="txtCity" editable="false" layoutX="85.0" layoutY="195.0" />
-            <HBox fx:id="hbSexo" disable="true" layoutX="478.0" layoutY="104.0" prefHeight="29.0" prefWidth="200.0">
+            <HBox fx:id="hbSexo" layoutX="478.0" layoutY="104.0" prefHeight="29.0" prefWidth="200.0">
                <children>
                   <RadioButton fx:id="rbMasculino" mnemonicParsing="false" text="Masculino">
                      <toggleGroup>
@@ -64,18 +64,18 @@
                   </RadioButton>
                </children>
             </HBox>
-            <Label fx:id="lblCity" layoutX="24.0" layoutY="203.0" text="Cidade" />
+            <Label layoutX="24.0" layoutY="203.0" text="Cidade" />
             <TextField fx:id="txtNome" editable="false" layoutX="85.0" layoutY="47.0" prefHeight="25.0" prefWidth="279.0" />
-            <Label fx:id="lblResponsavel" layoutX="383.0" layoutY="168.0" text="Responsável:" />
+            <Label layoutX="383.0" layoutY="168.0" text="Responsável:" />
             <TextField fx:id="txtTelefone" editable="false" layoutX="85.0" layoutY="76.0" prefHeight="25.0" prefWidth="153.0" />
-            <Label fx:id="lblCurso" layoutX="24.0" layoutY="142.0" text="Curso:" />
-            <Label fx:id="lblSexo" layoutX="383.0" layoutY="102.0" text="Sexo:" />
+            <Label layoutX="24.0" layoutY="142.0" text="Curso:" />
+            <Label layoutX="383.0" layoutY="102.0" text="Sexo:" />
             <TextField fx:id="txtMatricula" editable="false" layoutX="478.0" layoutY="43.0" />
             <TextField fx:id="txtEmail" editable="false" layoutX="85.0" layoutY="105.0" />
-            <Separator layoutX="18.0" layoutY="14.0" prefHeight="25.0" prefWidth="775.0" />
+            <Separator layoutX="18.0" layoutY="22.0" prefHeight="25.0" prefWidth="775.0" />
             <HBox fx:id="hbAbrirCancel" layoutX="576.0" layoutY="422.0">
                <children>
-                  <Button fx:id="btnCancelar" layoutX="670.0" layoutY="423.0" mnemonicParsing="false" onAction="#abrirNovoProcesso" prefHeight="29.0" prefWidth="84.0" style="-fx-background-color: #c94747;" text="CANCELAR" textFill="WHITE">
+                  <Button fx:id="btnCancelar" layoutX="670.0" layoutY="423.0" mnemonicParsing="false" onAction="#cancelarTudo" prefHeight="29.0" prefWidth="84.0" style="-fx-background-color: #c94747;" text="CANCELAR" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -114,15 +114,12 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
+            <Label layoutX="333.0" layoutY="12.0" text="DADOS DO ALUNO">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <ToggleButton fx:id="btnBuscar" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="558.0" layoutY="58.0" mnemonicParsing="false" onAction="#buscarAluno" prefHeight="30.0" prefWidth="38.0" style="-fx-background-radius: 100; -fx-background-color: trasparent;">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ToggleButton>
    </children>
 </AnchorPane>

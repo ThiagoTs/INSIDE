@@ -81,7 +81,7 @@ public class PainelAdmController implements Initializable{
 	}
 	
 	@FXML
-	public void deslogar(ActionEvent event) throws IOException {
+	public void deslogar(ActionEvent event) throws Exception {
 			adm = new Administrador();
 			
 			paneInicialAdm.getChildren().clear();
@@ -122,6 +122,10 @@ public class PainelAdmController implements Initializable{
 		}
 
 	}
+	public AnchorPane pegaPane(){
+		return this.aPaneProcessos;
+	}
+	
 
 
 }

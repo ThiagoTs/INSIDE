@@ -63,7 +63,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <TableView fx:id="tabAlunosPorbusca" layoutX="36.0" layoutY="182.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="116.0" prefWidth="730.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableViewAlu.css">
+                        <TableView fx:id="tabAlunosPorbusca" layoutX="36.0" layoutY="182.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="730.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableViewAlu.css">
                            <columns>
                               <TableColumn fx:id="colunMatric" editable="false" prefWidth="178.0" style="-fx-alignment: Center;" text="Matrícula" />
                               <TableColumn fx:id="colunNome" editable="false" prefWidth="380.0" style="-fx-alignment: Center;" text="Nome" />
@@ -153,7 +153,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tabBuscarProc" text="BUSCAR PROCESSO">
+            <Tab fx:id="tabBuscarProc" text="CONSULTA PROCESSO">
                <content>
                   <AnchorPane fx:id="aPaneBuscarProc" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                      <children>

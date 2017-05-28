@@ -34,7 +34,7 @@ public class TipoProcDao {
             "values(?,?);";
 	String sqlListarProc = "select * from tipoproc;";
     
-    String sqlListarAdmsTipo = "select administradores.nome,tipoproc.nome from admProc,tipoproc,administradores\n "+
+    String sqlListarAdmsTipo = "select administradores.id,administradores.nome,administradores.departamentos,tipoproc.nome as nomeProc from admProc,tipoproc,administradores\n "+
  "where admProc.id_Processo = tipoproc.id and administradores.id = admProc.id_Adm and  tipoproc.id=?;";
 
     public String salvarTipoProc(TipoProcesso pro) throws SQLException{
@@ -155,7 +155,9 @@ public class TipoProcDao {
 
 				Administrador adm = new Administrador();
 				
+				adm.setId(res.getInt("id"));
 				adm.setNome(res.getString("nome"));
+				adm.setDepartamento(res.getString("departamentos"));
 
                 admList.add(adm);
             }
