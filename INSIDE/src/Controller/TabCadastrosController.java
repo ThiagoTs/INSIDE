@@ -193,7 +193,7 @@ public class TabCadastrosController implements Initializable {
 	List<Documentos> docList = new ArrayList<>();
 	List<Documentos> docList2 = new ArrayList<>();
 	DocumentosNegocio docNegocio = new DocumentosNegocio();
-
+	PainelAdmController padm = new PainelAdmController();
 	int cont=0;
 
 
@@ -207,7 +207,7 @@ public class TabCadastrosController implements Initializable {
 		populaComboDoc();
 		preencherComboFluxo();
 		preencherComboTiProc();
-
+		
 	}
 	//TODO
 	//----------------------Cadastrar Usuário---------------------------------//
@@ -485,10 +485,12 @@ public class TabCadastrosController implements Initializable {
 			String msg = "Documento inserido!";
 			exibeMensagem(msg);
 			limparCamposDoc();
+			
 		}else{
 			String msg = "O documento ja existe na lista!";
 			exibeMensagem(msg);
 			limparCamposDoc();
+			
 		}
 	}
 	@FXML
@@ -670,6 +672,7 @@ public class TabCadastrosController implements Initializable {
 			if(salvo.equals("salvo")){
 				exibeMensagem("Tipo de processo salvo com sucesso!");
 				preencherComboTiProc();
+				
 			}else{
 				exibeMensagem(salvo);
 			}	

@@ -83,6 +83,7 @@ public class TelaLogonController implements Initializable{
 	AdmNegocio admNegocio = new AdmNegocio();
 	PainelAdmController painelAdm = new PainelAdmController();
 	List<Administrador> listAdm ;
+	TabProcPendController proPend = new TabProcPendController();
 
 	Main main = null;
 
@@ -109,8 +110,9 @@ public class TelaLogonController implements Initializable{
 			if(adm.getId()!=0){
 				if(adm.getSenha().equals(msg2)){	
 					painelAdm.pegaAdm(adm);	
+					proPend.pegaAdm(adm);
 					URL arquivoFXML;
-					arquivoFXML = getClass().getResource("/Visao/painelAdm.fxml");
+					arquivoFXML = getClass().getResource("/Visao/painelAdm2.fxml");
 					Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
 					panePrincipal.getChildren().clear();
 					panePrincipal.getChildren().add(fxmlParent);
@@ -118,10 +120,12 @@ public class TelaLogonController implements Initializable{
 				}else{
 					msg = "Usuário ou senha incorretos!";
 					exibeMensagem(msg);
+					adm= new Administrador();
 				}
 			}else{
 				msg = "Usuário ou senha incorretos!";
 				exibeMensagem(msg);
+				adm= new Administrador();
 			}
 		}
 
@@ -168,8 +172,9 @@ public class TelaLogonController implements Initializable{
 			if(adm.getId()!=0){
 				if(adm.getSenha().equals(msg2)){	
 					painelAdm.pegaAdm(adm);	
+					proPend.pegaAdm(adm);
 					URL arquivoFXML;
-					arquivoFXML = getClass().getResource("/Visao/painelAdm.fxml");
+					arquivoFXML = getClass().getResource("/Visao/painelAdm2.fxml");
 					Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
 					panePrincipal.getChildren().clear();
 					panePrincipal.getChildren().add(fxmlParent);

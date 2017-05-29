@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.Notifications;
 
 import Dao.AlunosDao;
+import Modelo.Administrador;
 import Modelo.Aluno;
 import Modelo.Documentos;
 import application.Main;
@@ -45,6 +46,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.layout.Pane;
 
 public class TabProcessosController implements Initializable {
+
 	@FXML
 	private AnchorPane aPaneProcesso;
 	@FXML
@@ -52,224 +54,57 @@ public class TabProcessosController implements Initializable {
 	@FXML
 	private Tab tabAbrirNovoProc;
 	@FXML
-	private AnchorPane aPaneAbrirPro;
-	@FXML
-	private TextField txtPesqAluno;
-	@FXML
-	private ComboBox<String> comboTipoPesquiAluno;
-	@FXML
-	private Button btnAbrirAlunoView;
-	@FXML
-	private ToggleButton btnBuscar;
-	@FXML
-	private TableView<Aluno> tabAlunosPorbusca;
-	@FXML
-	private TableColumn<Aluno,String> colunMatric;
-	@FXML
-	private TableColumn<Aluno,String> colunNome;
-	@FXML
-	private TableColumn<Aluno,String> colunCpf;
-	@FXML
-	private Text textProcAberto1;
+	private AnchorPane aPaneAbrirNovo;
 	@FXML
 	private Tab tabProcPendente;
 	@FXML
-	private AnchorPane aPaneProcPendente;
-	@FXML
-	private Text textProcAberto;
-	@FXML
-	private Pane panePendentes;
-	@FXML
-	private TableView tblProcPendente;
-	@FXML
-	private TableColumn colunPendProtoc;
-	@FXML
-	private TableColumn colunPendNomeProc;
-	@FXML
-	private TableColumn colunPendNomeAlu;
-	@FXML
-	private TextField txtBuscarProc;
-	@FXML
-	private Button btnAbrirProcView;
-	@FXML
-	private ToggleButton btnBuscarProcPendente;
+	private AnchorPane aPaneProcPend;
 	@FXML
 	private Tab tabBuscarProc;
 	@FXML
-	private AnchorPane aPaneBuscarProc;
-	@FXML
-	private Text textBuscarProcAberto;
-	@FXML
-	private TextField txtBuscarProcAberto;
-	@FXML
-	private ComboBox<String> comboTipoPesqui;
-	@FXML
-	private Pane paneProcesso;
-	@FXML
-	private TableView tblProcAbertos;
-	@FXML
-	private TableColumn colunProtBusc;
-	@FXML
-	private TableColumn colunBuscNomeProc;
-	@FXML
-	private TableColumn colunBuscNomeAlu;
-	@FXML
-	private TableColumn colunBuscStatus;
-	@FXML
-	private Button btnCacelBusc;
-	@FXML
-	private ToggleButton btnBuscarProcAberto;
+	private AnchorPane aPaneConsulProc;
 
-	Aluno alu = new Aluno();
-	AlunosDao aluDao = new AlunosDao();
-	List<Aluno> listAlu = new ArrayList<>() ;
-	ObservableList<Aluno> aluView = null;
-	Main main = null;
-	TelaDadosAlunoController aluC = new TelaDadosAlunoController();
+	TabProcPendController proPend = new TabProcPendController();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		preencherTipoPesq();
 
 
-	}
-	//TODO
-	//--------------------------------------ABRIR PROCESSO------------------------------//
-	@FXML
-	public void populaAlunosView(){
-		List<String> list = new ArrayList<>();
-		listAlu=aluDao.listarAlunos();
-		listAlu.forEach(alu ->{
-			list.add(alu.getNome());
-		});
-		comboTipoPesquiAluno.getItems().addAll(list);
-	}
-	@FXML
-	public void preencherTipoPesq(){
-		List<String> list = new ArrayList<>();
-		List<String> proc= new ArrayList<String>();
-		proc.add("Matrícula");
-		proc.add("Nome");
-		proc.add("CPF");
-		comboTipoPesquiAluno.getItems().addAll(proc);
-		list.add("Protocolo");
-		list.add("Nome");
-		list.add("Aluno");
-		comboTipoPesqui.getItems().addAll(list);
-	}
-	@FXML
-	public void buscarAluno(ActionEvent event) {
-		String pesq="";
-		alu = new Aluno();
-		pesq = comboTipoPesquiAluno.getSelectionModel().getSelectedItem();
-		tabAlunosPorbusca.getItems().removeAll();
-		listAlu = aluDao.listarAlunos();
-		if(pesq==null){
-			exibeMensagem("Selecione o tipo de pesquisa!");
-		}else{
-			if(pesq.equals("Nome")){
-				for( Aluno alu2:listAlu){
-					if(alu2.getNome().equalsIgnoreCase(txtPesqAluno.getText())){
-						alu=alu2;
-						populaViewAluno();
-					}
-				}
-			}else{
-				if(pesq.trim().equals("Matrícula")){
-					for(Aluno alu2:listAlu){
-						if(alu2.getMatricula().equals(txtPesqAluno.getText())){
-							alu=alu2;	
-							populaViewAluno();
-						}	
-					}
-				}else{
-					if(pesq.trim().equals("CPF")){
-						for(Aluno alu2:listAlu){
-							if(alu2.getCpf().equals(txtPesqAluno.getText())){
-								alu=alu2;
-								populaViewAluno();
-							}
-						}
-					}
-				}
-			}
-			if(alu.getId()==0){
-				exibeMensagem("Aluno não encontrado!");
-			}
+		try {
+			preencherTabs();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
 		}
-	}
-
-	public void populaViewAluno(){
-
-		colunMatric.setCellValueFactory(new PropertyValueFactory<Aluno, String>("Matricula"));
-		colunNome.setCellValueFactory(new PropertyValueFactory<Aluno, String>("Nome"));
-		colunCpf.setCellValueFactory(new PropertyValueFactory<Aluno, String>("cpf"));
-		aluView = FXCollections.observableArrayList(alu);
-		tabAlunosPorbusca.getItems().removeAll();
-		tabAlunosPorbusca.setItems(aluView);
-		comboTipoPesquiAluno.setValue("Selecione um item");
 
 	}
+
 	@FXML
-	public void abrirViewAluno(ActionEvent event) throws Exception {
-		aluC.recuperarAluno(alu);
+	public void preencherTabs() throws Exception {
+
 		URL arquivoFXML;
-		arquivoFXML = getClass().getResource("/Visao/telaDadosAluno.fxml");
-		Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
-		aPaneAbrirPro.getChildren().clear();
-		aPaneAbrirPro.getChildren().add(fxmlParent);
-	}
-	
-	@FXML
-	public void abrirProcView(ActionEvent event) {
-		// TODO Autogenerated
-	}
-	// Event Listener on ToggleButton[#btnBuscarProcPendente].onAction
-	@FXML
-	public void buscarProcessoPendente(ActionEvent event) {
-		// TODO Autogenerated
-	}
-	// Event Listener on Button[#btnCacelBusc].onAction
-	@FXML
-	public void cancelarBusca(ActionEvent event) {
-		// TODO Autogenerated
-	}
-	// Event Listener on ToggleButton[#btnBuscarProcAberto].onAction
-	@FXML
-	public void buscarProcessoAberto(ActionEvent event) {
-		// TODO Autogenerated
-	}
-
-	public void exibeMensagem(String msg){
+		arquivoFXML = getClass().getResource("/Visao/tabAbrirNovoProc.fxml");
+		Parent fxmlParent = null;
+		fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
+		//aPaneProcessos.getChildren().clear();
+		aPaneAbrirNovo.getChildren().add(fxmlParent);
 
 
-		Notifications.create()
-		.text(String.valueOf(msg))
-		.owner(main )
-		.hideAfter(Duration.seconds(3))
-		.darkStyle()
-		.position(Pos.TOP_RIGHT)
-		.showInformation();
+		URL arquivoFXML2;
+		arquivoFXML2 = getClass().getResource("/Visao/tabProcPend.fxml");
+		Parent fxmlParent2 =(Parent) FXMLLoader.load(arquivoFXML2);
+		//aPaneProcessos.getChildren().clear();
+		aPaneProcPend.getChildren().add(fxmlParent2);
 
 
+
+		URL arquivoFXML3;
+		arquivoFXML3 = getClass().getResource("/Visao/tabConsultaProc.fxml");
+		Parent fxmlParent3 =(Parent) FXMLLoader.load(arquivoFXML3);
+		//aPaneProcessos.getChildren().clear();
+		aPaneConsulProc.getChildren().add(fxmlParent3);
 	}
-	public void animaCamposValidados(List<Control> controls) {
-		controls.forEach(control -> {
-			RotateTransition rotateTransition = new RotateTransition(Duration.millis(60), control);
-			rotateTransition.setFromAngle(-4);
-			rotateTransition.setToAngle(4);
-			rotateTransition.setCycleCount(8);
-			rotateTransition.setAutoReverse(true);
-			rotateTransition.setOnFinished((ActionEvent event1) ->{
-				control.setRotate(0);
-			});
-			rotateTransition.play();
-		});
-		if(!controls.isEmpty()){
-			controls.get(0).requestFocus();
 
-		}
-	}
 
 
 }
