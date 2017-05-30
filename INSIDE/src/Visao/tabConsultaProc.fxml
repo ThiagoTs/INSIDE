@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="aPaneConsulProc" prefHeight="453.0" prefWidth="801.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TabConsultaProcController">
+   <children>
+      <Label layoutX="14.0" layoutY="76.0" text="Pesquisar por:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Text fx:id="textBuscarProcAberto" layoutX="293.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONSULTAR PROCESSO ABERTO" wrappingWidth="226.4755859375">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Separator layoutX="14.0" layoutY="41.0" prefHeight="13.0" prefWidth="774.0" />
+      <Pane fx:id="paneProcesso" layoutX="13.0" layoutY="121.0" prefHeight="337.0" prefWidth="776.0">
+         <children>
+            <TableView fx:id="tblProcAbertos" layoutX="10.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="756.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+               <columns>
+                  <TableColumn fx:id="colunProtBusc" editable="false" prefWidth="121.0" text="Protocolo" />
+                  <TableColumn fx:id="colunBuscNomeProc" prefWidth="158.0" text="Nome do processo" />
+                  <TableColumn fx:id="colunBuscNomeAlu" prefWidth="287.0" text="Aluno" />
+                  <TableColumn fx:id="colunBuscStatus" prefWidth="189.0" text="Status" />
+               </columns>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </TableView>
+            <Button fx:id="btnCacelBusc" layoutX="700.0" layoutY="230.0" mnemonicParsing="false" onAction="#cancelarBusca" style="-fx-background-color: #c94747;" text="Cancelar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <TextField fx:id="txtBuscarProcAberto" layoutX="290.0" layoutY="76.0" prefHeight="25.0" prefWidth="233.0" promptText="Insira o nome do processo" />
+      <ComboBox fx:id="comboTipoPesqui" layoutX="126.0" layoutY="76.0" prefHeight="27.0" prefWidth="156.0" promptText="Selecione um item" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ToggleButton fx:id="btnBuscarProcAberto" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="530.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarProcessoAberto" prefHeight="26.0" prefWidth="26.0" style="-fx-background-radius: 100;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="2.0" />
+         </padding>
+      </ToggleButton>
+      <Separator layoutX="14.0" layoutY="435.0" prefHeight="13.0" prefWidth="774.0" />
+   </children>
+</AnchorPane>

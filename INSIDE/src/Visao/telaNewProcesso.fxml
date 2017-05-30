@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="aPanePrincipal" prefHeight="453.0" prefWidth="740.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaNewProcessoController">
+   <children>
+      <Separator layoutX="15.0" layoutY="39.0" prefHeight="0.0" prefWidth="711.0" />
+      <Separator layoutX="15.0" layoutY="415.0" prefHeight="0.0" prefWidth="711.0" />
+      <Label layoutX="308.0" layoutY="14.0" text="ABRIR PROCECSSO">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="137.0" text="Tipo de processo:*">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboTipoProc" layoutX="138.0" layoutY="132.0" onAction="#pegaTipoProc" prefHeight="25.0" prefWidth="242.0" promptText="Selecione um tipo" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: lightgray;" />
+      <TextArea fx:id="txtComent" layoutX="138.0" layoutY="181.0" prefHeight="134.0" prefWidth="242.0" />
+      <Label layoutX="23.0" layoutY="182.0" text="Comentarios:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listaDocs" layoutX="424.0" layoutY="116.0" prefHeight="200.0" prefWidth="242.0" stylesheets="@../../../../../Desktop/INSIDE/listView.css" />
+      <ListView fx:id="listaAnexos" layoutX="664.0" layoutY="116.0" prefHeight="200.0" prefWidth="42.0" style="-fx-background-position: center;" />
+      <Button layoutX="424.0" layoutY="84.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="282.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="Documentos" textAlignment="CENTER" textFill="#111111">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="23.0" layoutY="91.0" text="Nome do Aluno:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNomeAluno" editable="false" layoutX="138.0" layoutY="87.0" prefHeight="25.0" prefWidth="242.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></TextField>
+      <HBox layoutX="534.0" layoutY="376.0" prefHeight="32.0" prefWidth="172.0">
+         <children>
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: #c94747;" text="CANCELAR" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnAbrir" mnemonicParsing="false" onAction="#abrirNewProc" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: green;" text="ABRIR" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

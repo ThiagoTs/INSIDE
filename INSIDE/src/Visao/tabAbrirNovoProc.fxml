@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="aPaneAbrirPro" prefHeight="453.0" prefWidth="740.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TabAbrirNovoProcController">
+   <children>
+      <Button fx:id="btnAbrirAlunoView" layoutX="685.0" layoutY="306.0" mnemonicParsing="false" onAction="#abrirViewAluno" prefHeight="30.0" prefWidth="81.0" style="-fx-background-color: green;" text="ABRIR" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Separator layoutX="13.0" layoutY="381.0" prefHeight="25.0" prefWidth="775.0" />
+      <TextField fx:id="txtPesqAluno" layoutX="324.0" layoutY="56.0" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="2" />
+      <Label layoutX="36.0" layoutY="58.0" text="Pesquisar aluno por:" textFill="#403e3e">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboTipoPesquiAluno" layoutX="159.0" layoutY="55.0" prefHeight="27.0" prefWidth="159.0" promptText="Selecione um item" style="-fx-background-color: white; -fx-border-color: lightgray; -fx-border-radius: 5;" GridPane.columnIndex="1">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <Button layoutX="36.0" layoutY="150.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="730.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="ALUNO" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Text fx:id="textProcAberto1" layoutX="342.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAR ALUNO" wrappingWidth="118.3310546875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tabAlunosPorbusca" layoutX="36.0" layoutY="182.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="730.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableViewAlu.css">
+         <columns>
+            <TableColumn fx:id="colunMatric" editable="false" prefWidth="178.0" style="-fx-alignment: Center;" text="Matrícula" />
+            <TableColumn fx:id="colunNome" editable="false" prefWidth="364.0" style="-fx-alignment: Center;" text="Nome" />
+            <TableColumn fx:id="colunCpf" editable="false" prefWidth="187.0" style="-fx-alignment: Center;" text="CPF" />
+         </columns>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TableView>
+      <ToggleButton fx:id="btnBuscar" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="554.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarAluno" prefHeight="26.0" prefWidth="30.0" style="-fx-background-radius: 100;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../../../../Desktop/INSIDE/pesq.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ToggleButton>
+      <Separator layoutX="13.0" layoutY="36.0" prefHeight="25.0" prefWidth="775.0" />
+   </children>
+</AnchorPane>
