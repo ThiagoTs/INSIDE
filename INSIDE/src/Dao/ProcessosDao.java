@@ -32,19 +32,22 @@ public class ProcessosDao {
 
 	String sqlListarProc = "select * from processos;";
 
-    String sqlSalvar = "INSERT INTO processos(nome,status,comentarios,dataIni,id_Aluno)"+
-    "VALUES(?,?,?,?,?);";
+    String sqlSalvar = "INSERT INTO processos(nome,status,comentarios,dataIni,id_Aluno,nomeAluno)"+
+    "VALUES(?,?,?,?,?,?);";
 
     String sqlRelacao = "INSERT INTO procopen(id_Proc,id_Resp,cont,status)"+
     "VALUES(?,?,?,?);";
     
     String sqlListarPorAluno = "select processos.* from processos,alunos where id_Aluno = alunos.id and alunos.id = ?;";
     
-    String sqlListarPorAdm = "select processos.*,administradores.nome as nomeAdm,administradores.departamentos,procopen.status as statusPend,alunos.nome as alunoNome "
-    		+ "from procopen,processos,administradores,alunos where id_Proc = processos.id and id_Resp = administradores.id and id_Aluno=alunos.id and administradores.id = ?;";
+    String sqlListarPorAdm = "select processos.*,administradores.nome as nomeAdm,administradores.departamentos,procopen.status" 
+    		+" as statusPend from procopen,processos,administradores where procopen.id_Proc = processos.id"
+    		+ " and procopen.id_Resp = administradores.id and administradores.id = ?;";
+    String sqlListarPorProcesso = "select procopen.id as idOpen,procopen.cont,processos.*,administradores.nome as nomeAdm,administradores.departamentos,procopen.status"
++" as statusPend,alunos.nome as alunoNome from procopen,processos,administradores,alunos"
+ +" where procopen.id_Proc = processos.id and procopen.id_Resp = administradores.id and processos.id_Aluno=alunos.id and processos.id=?;";
     		
-    		
-    public String salvarProc(Processo pro,Aluno alu) throws SQLException{
+    public String salvarProc(Processo pro) throws SQLException{
     	String salvo = "falha";
     	
 
@@ -55,7 +58,8 @@ public class ProcessosDao {
             stmt.setString(2, pro.getStatus());
             stmt.setString(3, pro.getComentarios());
             stmt.setDate(4, Date.valueOf(pro.getDataProc()));
-            stmt.setInt(5, alu.getId());
+            stmt.setInt(5, pro.getIdAluno());
+            stmt.setString(6, pro.getAlunoNome());
             
        
 
@@ -146,6 +150,7 @@ public class ProcessosDao {
 				LocalDate data = res.getDate("dataIni").toLocalDate();
 				proc.setDataProc(data);
 				proc.setIdAluno(res.getInt("id_Aluno"));
+				proc.setAlunoNome(res.getString("nomeAluno"));
 
                 processos.add(proc);
             }
@@ -182,10 +187,12 @@ public class ProcessosDao {
             }
         }
         catch (SQLException e){
-            System.out.println("Erro na consulta 1:" + e.getMessage());
+            System.out.println("Erro na consulta proAlu:" + e.getMessage());
         }
         return processos;
     }
+    
+    
     public List<Processo> listarProcProAdm(Administrador adm) {
     	List<Processo> processos = new ArrayList<Processo>();
         ResultSet res = null;
@@ -210,7 +217,7 @@ public class ProcessosDao {
 				proc.setIdAluno(res.getInt("id_Aluno"));
 				proc.setNomeAdm(res.getString("nomeAdm"));
 				proc.setAdmDepart(res.getString("departamentos"));
-				proc.setAlunoNome(res.getString("alunoNome"));
+				proc.setAlunoNome(res.getString("nomeAluno"));
 				proc.setStatusPend(res.getString("statusPend"));
 				
 
@@ -218,9 +225,133 @@ public class ProcessosDao {
             }
         }
         catch (SQLException e){
-            System.out.println("Erro na consulta 1:" + e.getMessage());
+            System.out.println("Erro na consulta proAdm:" + e.getMessage());
         }
         return processos;
     }
+    public List<Processo> listarProcessos(Processo pro) {
+    	List<Processo> processos = new ArrayList<Processo>();
+        ResultSet res = null;
+
+		try {
+			
+		    stmt = con.prepareStatement(sqlListarPorProcesso);
+            stmt.setInt(1, pro.getId());
+            res = stmt.executeQuery();
+            
+			while (res.next()){
+
+				Processo proc = new Processo();
+				
+				proc.setIdOpen(res.getInt("idopen"));
+				proc.setId(res.getInt("id"));
+				proc.setNome(res.getString("nome"));
+				proc.setComentarios(res.getString("comentarios"));
+				LocalDate data = res.getDate("dataIni").toLocalDate();
+				proc.setDataProc(data);
+				proc.setStatus(res.getString("status"));
+				proc.setIdAluno(res.getInt("id_Aluno"));
+				proc.setNomeAdm(res.getString("nomeAdm"));
+				proc.setAdmDepart(res.getString("departamentos"));
+				proc.setAlunoNome(res.getString("alunoNome"));
+				proc.setStatusPend(res.getString("statusPend"));
+				proc.setCont(res.getInt("cont"));
+				
+
+                processos.add(proc);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Erro na consulta pro:" + e.getMessage());
+        }
+        return processos;
+    }
+    public String  alterarStatus(Processo pro) {
+		String salvo = "falha";
+		try {
+			String sql;
+			sql  = "update processos set status = ?,comentarios = ? where id=?;";
+
+			stmt = con.prepareStatement(sql);
+
+			stmt.setString(1, pro.getStatus());
+			stmt.setString(2, pro.getComentarios());
+			stmt.setInt(2, pro.getId());
+		
+
+			stmt.executeUpdate();
+			salvo = "salvo";
+
+		} catch (SQLException e) {
+			System.out.println("Erro na alteracao status:" + e.getMessage());
+		}
+
+		return salvo;
+	}
+    public String  alterarStatusOn(Processo pro) {
+ 		String salvo = "falha";
+ 		try {
+ 			String sql;
+ 			sql  = "update procopen set status = ? where id=?;";
+
+ 			stmt = con.prepareStatement(sql);
+
+ 			stmt.setString(1, pro.getStatusPend());
+ 			stmt.setInt(2, pro.getIdOpen());
+ 		
+
+ 			stmt.executeUpdate();
+ 			salvo = "salvo";
+
+ 		} catch (SQLException e) {
+ 			System.out.println("Erro na alteracao on:" + e.getMessage());
+ 		}
+
+ 		return salvo;
+ 	}
+    public String  alterarStatusNext(Processo pro) {
+ 		String salvo = "falha";
+ 		try {
+ 			String sql;
+ 			sql  = "update procopen set status = ? where id=?;";
+
+ 			stmt = con.prepareStatement(sql);
+
+ 			stmt.setString(1, pro.getStatusPend());
+ 			stmt.setInt(2, pro.getIdOpen());
+ 		
+
+ 			stmt.executeUpdate();
+ 			salvo = "salvo";
+
+ 		} catch (SQLException e) {
+ 			System.out.println("Erro na alteracao next:" + e.getMessage());
+ 		}
+
+ 		return salvo;
+ 	}
+    public String  alterarStatusOff(Processo pro) {
+ 		String salvo = "falha";
+ 		try {
+ 			String sql;
+ 			sql  = "update procopen set status = ? where id=?;";
+
+ 			stmt = con.prepareStatement(sql);
+
+ 			stmt.setString(1, pro.getStatusPend());
+ 			stmt.setInt(2, pro.getIdOpen());
+ 		
+
+ 			stmt.executeUpdate();
+ 			salvo = "salvo";
+
+ 		} catch (SQLException e) {
+ 			System.out.println("Erro na alteracao next:" + e.getMessage());
+ 		}
+
+ 		return salvo;
+ 	}
+
+    
 
 }

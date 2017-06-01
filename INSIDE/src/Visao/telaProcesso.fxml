@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane fx:id="paneProcesso" prefHeight="337.0" prefWidth="801.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaProcessoController">
+<Pane fx:id="paneProcesso" prefHeight="337.0" prefWidth="790.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TelaProcessoController">
    <children>
-      <AnchorPane fx:id="ApaneTabela" prefHeight="337.0" prefWidth="801.0">
+      <AnchorPane fx:id="ApaneTabela" prefHeight="337.0" prefWidth="790.0">
          <children>
-            <HBox fx:id="hbResposta" alignment="TOP_RIGHT" layoutX="635.0" layoutY="211.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="136.0">
+            <HBox alignment="TOP_RIGHT" layoutX="647.0" layoutY="178.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="136.0">
                <children>
                   <Button fx:id="btnIndeferir" mnemonicParsing="false" onAction="#indeferirProc" style="-fx-background-color: red;" text="Indeferir" textFill="WHITE">
                      <cursor>
@@ -39,23 +39,22 @@
                   </Button>
                </children>
             </HBox>
-            <TableView fx:id="tblProcessosView" layoutX="15.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="178.0" prefWidth="756.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
+            <TableView fx:id="tblProcessosView" layoutX="8.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="775.0" style="-fx-background-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView.css">
                <columns>
-                  <TableColumn fx:id="colunProcesso" editable="false" prefWidth="121.0" text="Protocolo" />
-                  <TableColumn prefWidth="144.0" text="Nome do processo" />
-                  <TableColumn fx:id="colunStatus" prefWidth="222.0" text="Aluno" />
-                  <TableColumn prefWidth="268.0" text="Comentários" />
+                  <TableColumn fx:id="colunProtoc" editable="false" prefWidth="115.0" style="-fx-alignment: Center;" text="Protocolo" />
+                  <TableColumn fx:id="colunNomeProc" prefWidth="168.0" style="-fx-alignment: Center;" text="Nome do processo" />
+                  <TableColumn fx:id="colunAluno" prefWidth="258.0" text="Aluno" />
+                  <TableColumn fx:id="colunComent" prefWidth="233.0" text="Comentários" />
                </columns>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TableView>
-            <Label layoutX="14.0" layoutY="209.0" text="Comentários:" />
-            <TextArea layoutX="86.0" layoutY="209.0" prefHeight="63.0" prefWidth="324.0" />
-            <Separator layoutX="14.0" layoutY="288.0" prefHeight="4.0" prefWidth="775.0" />
-            <HBox fx:id="hbResposta1" alignment="TOP_RIGHT" layoutX="316.0" layoutY="299.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="154.0">
+            <Label layoutX="13.0" layoutY="176.0" text="Comentários:" />
+            <TextArea fx:id="txtComent" layoutX="85.0" layoutY="176.0" prefHeight="63.0" prefWidth="324.0" />
+            <HBox alignment="TOP_RIGHT" layoutX="332.0" layoutY="269.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="154.0">
                <children>
-                  <Button fx:id="btnIndeferir1" mnemonicParsing="false" onAction="#indeferirProc" style="-fx-background-color: orange;" text="Cancelar" textFill="WHITE">
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelarProc" style="-fx-background-color: orange;" text="Cancelar" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -66,7 +65,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnDeferir1" mnemonicParsing="false" onAction="#deferirProc" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: blue;" text="Enviar" textFill="WHITE">
+                  <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#enviarProc" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: blue;" text="Enviar" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

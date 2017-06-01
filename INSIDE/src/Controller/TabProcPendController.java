@@ -60,7 +60,7 @@ public class TabProcPendController implements Initializable {
 	ObservableList<Processo> proView = null;
 	List<Processo> listProcPend = new ArrayList<>();
 	static Administrador adm = new Administrador(); ;
-	
+	TelaProcessoController tPro = new TelaProcessoController();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		populaProcPend();
@@ -73,11 +73,15 @@ public class TabProcPendController implements Initializable {
 	
 	@FXML
 	public void abrirProcView(ActionEvent event) throws Exception {
+		Processo proc = tblProcPendente.getSelectionModel().getSelectedItem();
+		if(proc!=null){
+		tPro.pegaProc(proc);
 		URL arquivoFXML;
 		arquivoFXML = getClass().getResource("/Visao/telaProcesso.fxml");
 		Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
 		panePendentes.getChildren().clear();
 		panePendentes.getChildren().add(fxmlParent);
+		}
 	}
 	// Event Listener on ToggleButton[#btnBuscarProcPendente].onAction
 	@FXML

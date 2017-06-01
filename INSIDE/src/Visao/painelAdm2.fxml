@@ -25,7 +25,7 @@
 					<children>
 						<TableView fx:id="tblStatusProc" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="178.0" style="-fx-background-color: white; -fx-border-color: gray;" stylesheets="@../../../../../Desktop/INSIDE/tableView%20STATUS.css" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
 							<columns>
-								<TableColumn fx:id="colunStatusProc" editable="false" minWidth="0.0" prefWidth="199.0" text="STATUS DE PROCESSOS" />
+								<TableColumn fx:id="colunStatusProc" editable="false" minWidth="0.0" prefWidth="199.0" text="PROCESSOS PENDENTES" />
 							</columns>
 						</TableView>
 					</children>

@@ -18,13 +18,19 @@ public class Processo {
 	
 // não instanciado;
 	private int idAluno;
+	private String nomeAluno;
+	
 	private String nomeAdm;
 	
 
 	private String alunoNome;
 	private String admDepart;
 	private String statusPend;
+	private int idOpen;
+	private int cont;
 	
+	
+
 	private SimpleStringProperty statusAlu = new SimpleStringProperty();
 	
 
@@ -144,6 +150,28 @@ public class Processo {
 	}
 	public void setStatusAluProperty(SimpleStringProperty statusAlu) {
 		this.statusAlu = statusAlu;
+	}
+	public String getNomeAluno() {
+		return nomeAluno;
+	}
+
+	public void setNomeAluno(String nomeAluno) {
+		this.nomeAluno = nomeAluno;
+	}
+	public int getIdOpen() {
+		return idOpen;
+	}
+
+	public void setIdOpen(int idOpen) {
+		this.idOpen = idOpen;
+	}
+
+	public int getCont() {
+		return cont;
+	}
+
+	public void setCont(int cont) {
+		this.cont = cont;
 	}
 
 }

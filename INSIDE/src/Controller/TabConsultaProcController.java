@@ -13,12 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Dao.ProcessosDao;
+import Modelo.Processo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.ComboBox;
 
 import javafx.scene.control.ToggleButton;
-
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -34,15 +38,15 @@ public class TabConsultaProcController implements Initializable{
 	@FXML
 	private Pane paneProcesso;
 	@FXML
-	private TableView tblProcAbertos;
+	private TableView<Processo> tblProcAbertos;
 	@FXML
-	private TableColumn colunProtBusc;
+	private TableColumn<Processo,Integer> colunProtBusc;
 	@FXML
-	private TableColumn colunBuscNomeProc;
+	private TableColumn<Processo,String> colunBuscNomeProc;
 	@FXML
-	private TableColumn colunBuscNomeAlu;
+	private TableColumn<Processo,String>  colunBuscNomeAlu;
 	@FXML
-	private TableColumn colunBuscStatus;
+	private TableColumn<Processo,String>  colunBuscStatus;
 	@FXML
 	private Button btnCacelBusc;
 	@FXML
@@ -52,9 +56,14 @@ public class TabConsultaProcController implements Initializable{
 	@FXML
 	private ToggleButton btnBuscarProcAberto;
 	
+	
+	ProcessosDao proDao = new ProcessosDao();
+	List<Processo> listPro = new ArrayList<Processo>();
+	ObservableList<Processo> proView;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		preencherTipoPesq();
+		populaProView();
 		
 	}
 	@FXML
@@ -66,6 +75,17 @@ public class TabConsultaProcController implements Initializable{
 		comboTipoPesqui.getItems().addAll(list);
 	}
 
+	public void populaProView(){
+		listPro = proDao.listarProc();
+		
+		colunProtBusc.setCellValueFactory(new PropertyValueFactory<Processo, Integer>("id"));
+		colunBuscNomeProc.setCellValueFactory(new PropertyValueFactory<Processo, String>("Nome"));
+		colunBuscNomeAlu.setCellValueFactory(new PropertyValueFactory<Processo, String>("alunoNome"));
+		colunBuscStatus.setCellValueFactory(new PropertyValueFactory<Processo, String>("status"));
+		proView = FXCollections.observableArrayList(listPro);
+		tblProcAbertos.getItems().removeAll();
+		tblProcAbertos.setItems(proView);
+	}
 	// Event Listener on Button[#btnCacelBusc].onAction
 	@FXML
 	public void cancelarBusca(ActionEvent event) {

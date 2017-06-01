@@ -73,25 +73,25 @@ public class PainelAdmController implements Initializable{
 
 	static Administrador adm = new Administrador();
 	InicialController iniCon = new InicialController();
-	 ProcessosDao proDao = new ProcessosDao();
-	 ObservableList<Processo> proPendView = null;
-	 List<Processo> listProcPend = new ArrayList<Processo>();
-	 AlunosDao aluDao = new AlunosDao();
-	
+	ProcessosDao proDao = new ProcessosDao();
+	ObservableList<Processo> proPendView = null;
+	List<Processo> listProcPend = new ArrayList<Processo>();
+	AlunosDao aluDao = new AlunosDao();
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		textUser.setText(adm.getNome());
 		preencherMenus();
 		populaStatusProc();
-		
-		
+
+
 	}
 
-	
+
 	public static void pegaAdm(Administrador adm1){
 		adm = adm1;
 	}
-	
+
 
 	@FXML
 	public void abrirConfig(ActionEvent event) {
@@ -102,65 +102,66 @@ public class PainelAdmController implements Initializable{
 		List<Processo> listPro = new ArrayList<>();
 		listProcPend = proDao.listarProcProAdm(adm);
 		for(Processo pro : listProcPend){
-			
-			status = pro.getNome()+"\nAluno: "+pro.getAlunoNome()+"\n"+pro.getDataProc().toString();
-			pro.setStatusAlu(status);
-			listPro.add(pro);
+			if(pro.getStatusPend().equals("on")){
+				status = pro.getNome()+"\nAluno: "+pro.getAlunoNome()+"\n"+pro.getDataProc().toString();
+				pro.setStatusAlu(status);
+				listPro.add(pro);
+			}
 		}
-		
+
 		colunStatusProc.setCellValueFactory(new PropertyValueFactory<Processo,String>("statusAlu"));
 		//colunStatusProc.setCellValueFactory(new PropertyValueFactory<Processo, String>("Status"));
 		proPendView = FXCollections.observableArrayList(listPro);
 		tblStatusProc.getItems().removeAll();
 		tblStatusProc.setItems(proPendView);
-		
+
 	}
-	
+
 	@FXML
 	public void deslogar(ActionEvent event) throws Exception {
-			adm = new Administrador();
-			
-			paneInicialAdm.getChildren().clear();
-			 URL arquivoFXML;
-		        arquivoFXML = getClass().getResource("/Visao/telaLogon.fxml");
-		        Parent fxmlParent = null;
-				try {
-					fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				paneInicialAdm.getChildren().clear();
-				paneInicialAdm.getChildren().add(fxmlParent);
+		adm = new Administrador();
+
+		paneInicialAdm.getChildren().clear();
+		URL arquivoFXML;
+		arquivoFXML = getClass().getResource("/Visao/telaLogon.fxml");
+		Parent fxmlParent = null;
+		try {
+			fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		paneInicialAdm.getChildren().clear();
+		paneInicialAdm.getChildren().add(fxmlParent);
 	}
 	public void preencherMenus(){
 		try {
-			
+
 			URL arquivoFXML;
 			arquivoFXML = getClass().getResource("/Visao/tabProcessos.fxml");
 			Parent fxmlParent =(Parent) FXMLLoader.load(arquivoFXML);
 			//aPaneProcessos.getChildren().clear();
 			aPaneProcessos.getChildren().add(fxmlParent);
-			
-		
+
+
 		} catch (Exception e) {
 			e.getMessage();
 		}
 		try {
-			
+
 			URL arquivoFXML2;
 			arquivoFXML2 = getClass().getResource("/Visao/tabCadastros.fxml");
 			Parent fxmlParent2 =(Parent) FXMLLoader.load(arquivoFXML2);
 			//aPaneCadastros.getChildren().clear();
 			aPaneCadastros.getChildren().add(fxmlParent2);
-			
+
 		} catch (Exception e) {
 			e.getMessage();
 		}
 
 	}
-	
-	
+
+
 
 
 }

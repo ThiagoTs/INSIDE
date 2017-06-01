@@ -54,6 +54,8 @@ public class TelaNewProcessoController implements Initializable {
 	private TextField txtNomeAluno;
 	@FXML
 	private Button btnCancelar;
+	@FXML
+	private TextArea txtDescri;
 	
 	private CheckBox btnAnexo;
 
@@ -75,6 +77,7 @@ public class TelaNewProcessoController implements Initializable {
 		populaDocs();
 		populaTipoProc();
 		txtNomeAluno.setText(alu.getNome());
+		txtDescri.setText("");
 
 	}
 
@@ -84,15 +87,18 @@ public class TelaNewProcessoController implements Initializable {
 		listAdm=tiProcDao.listarAdmsTipo(tiProc);
 		String nomeProc = comboTipoProc.getSelectionModel().getSelectedItem();
 		String comentario = txtComent.getText();
-		if(!nomeProc.equals("")||nomeProc!=null){
+		if(!nomeProc.equals("")||nomeProc==null){
 			proc.setNome(nomeProc);
 			if(!comentario.equals("")){
 				proc.setComentarios(comentario);
 			}
 			proc.setDataProc(LocalDate.now());
 			proc.setIdAluno(alu.getId());
+			proc.setAlunoNome(alu.getNome());
 			proc.setStatus("Aguardando resposta de "+ listAdm.get(0).getNome()+ " - "+ listAdm.get(0).getDepartamento());
-			salvo = proDao.salvarProc(proc, alu);
+			salvo = proDao.salvarProc(proc);
+		}else{
+			exibeMensagem("Selecione um tipo de processo!");
 		}
 		if(salvo.equals("salvo")){
 			Processo pro = buscarProc();
@@ -139,7 +145,7 @@ public class TelaNewProcessoController implements Initializable {
 		List<Processo>listProc2 = new ArrayList<>();
 		listProc2 = proDao.listarProc();
 		for(Processo pro2 : listProc2){
-			if(pro2.getNome().equals(proc.getNome())){
+			if(pro2.getNome().equals(proc.getNome())&&pro2.getIdAluno()==alu.getId()){
 				return pro=pro2;
 			}
 		}
@@ -172,9 +178,11 @@ public class TelaNewProcessoController implements Initializable {
 	public void pegaTipoProc(ActionEvent event) {
 		String nomeTipoProc = comboTipoProc.getSelectionModel().getSelectedItem();
 		tiProc=procNeg.listarTipoProc(nomeTipoProc);
+		txtDescri.setText(tiProc.getDescricao());
 		populaDocs();
 	}
 	public void finalizar() throws Exception{
+
 		URL arquivoFXML;
 		arquivoFXML = getClass().getResource("/Visao/tabAbrirNovoProc.fxml");
 		Parent fxmlParent = null;

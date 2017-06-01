@@ -17,33 +17,33 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="23.0" layoutY="137.0" text="Tipo de processo:*">
+      <Label layoutX="23.0" layoutY="127.0" text="Tipo de processo:*">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboTipoProc" layoutX="138.0" layoutY="132.0" onAction="#pegaTipoProc" prefHeight="25.0" prefWidth="242.0" promptText="Selecione um tipo" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: lightgray;" />
-      <TextArea fx:id="txtComent" layoutX="138.0" layoutY="181.0" prefHeight="134.0" prefWidth="242.0" />
-      <Label layoutX="23.0" layoutY="182.0" text="Comentarios:">
+      <ComboBox fx:id="comboTipoProc" layoutX="138.0" layoutY="125.0" onAction="#pegaTipoProc" prefHeight="25.0" prefWidth="242.0" promptText="Selecione um tipo" style="-fx-background-color: white; -fx-border-radius: 5; -fx-border-color: lightgray;" />
+      <TextArea fx:id="txtComent" layoutX="138.0" layoutY="271.0" prefHeight="82.0" prefWidth="242.0" promptText="Digite algum comentário" />
+      <Label layoutX="23.0" layoutY="270.0" text="Comentarios:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <ListView fx:id="listaDocs" layoutX="424.0" layoutY="116.0" prefHeight="200.0" prefWidth="242.0" stylesheets="@../../../../../Desktop/INSIDE/listView.css" />
-      <ListView fx:id="listaAnexos" layoutX="664.0" layoutY="116.0" prefHeight="200.0" prefWidth="42.0" style="-fx-background-position: center;" />
-      <Button layoutX="424.0" layoutY="84.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="282.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="Documentos" textAlignment="CENTER" textFill="#111111">
+      <ListView fx:id="listaDocs" layoutX="424.0" layoutY="153.0" prefHeight="200.0" prefWidth="252.0" stylesheets="@../../../../../Desktop/INSIDE/listView.css" />
+      <ListView fx:id="listaAnexos" layoutX="670.0" layoutY="153.0" prefHeight="200.0" prefWidth="36.0" style="-fx-background-position: center;" />
+      <Button layoutX="424.0" layoutY="121.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="282.0" stylesheets="@../../../../../Desktop/INSIDE/teste.css" text="Documentos" textAlignment="CENTER" textFill="#111111">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Label layoutX="23.0" layoutY="91.0" text="Nome do Aluno:">
+      <Label layoutX="23.0" layoutY="67.0" text="Nome do Aluno:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNomeAluno" editable="false" layoutX="138.0" layoutY="87.0" prefHeight="25.0" prefWidth="242.0">
+      <TextField fx:id="txtNomeAluno" editable="false" layoutX="138.0" layoutY="63.0" prefHeight="25.0" prefWidth="242.0" style="-fx-background-color: #f0f0f0; -fx-border-color: lightgray; -fx-border-radius: 5;">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font></TextField>
       <HBox layoutX="534.0" layoutY="376.0" prefHeight="32.0" prefWidth="172.0">
          <children>
@@ -68,5 +68,11 @@
             </Button>
          </children>
       </HBox>
+      <Label layoutX="23.0" layoutY="175.0" text="Descrição:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtDescri" editable="false" layoutX="138.0" layoutY="176.0" prefHeight="64.0" prefWidth="242.0" />
    </children>
 </AnchorPane>
